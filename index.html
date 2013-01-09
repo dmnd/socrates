@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Socrates static test page</title>
+
+<!-- PackageManager dependencies -->
+<script src="/javascript/shared-package/jquery.js"></script>
+<script src="/javascript/shared-package/underscore.js"></script>
+<script src="/javascript/shared-package/console.js"></script>
+<script>KAConsole.enable(true);</script>
+
+<!-- Dynamic package loading -->
+<script src="/javascript/shared-package/packageloader.js"></script>
+<script src="/javascript/test/packageregistrar.js"></script>
+
+<!-- Some crufty globals that are assumed to exist by KA packages -->
+<script src="/javascript/test/globals.js"></script>
+<script>
+var KA_TEST = {
+    PACKAGE_REGISTRAR_DEPS: [
+        "jquery.js",
+        "underscore.js",
+        "console.js",
+        "packageloader.js"
+    ]
+};
+</script>
+
+
+<script>
+var requireDependencies = function(callback) {
+    var PM = PackageManager;
+    PM.register("socrates.css", "socrates.js");
+
+    var deps = ["shared.css", "video.css", "video.js"];
+    PM.register.apply(PM, deps).then(function() {
+        PM.require.apply(PM, deps).then(callback);
+    });
+};
+
+var setup = function(youtubeId, callback) {
+    requireDependencies(function() {
+        var videoView = new VideoView({youtubeId: youtubeId});
+        $("body").append(videoView.el);
+        videoView.whenReady().then(_.bind(callback, null, videoView));
+    });
+};
+
+setup("-a_w0_VAo6U", function(vv) {
+    window.vv = vv;
+});
+</script>
+</head>
+</html>

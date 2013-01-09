@@ -1,0 +1,25 @@
+<div class="submit-area">
+    <span class="alert alert-success">
+        <img class="face" src="/images/face-smiley.png">
+        Correct!
+    </span>
+    <span class="alert alert-error">
+        <img class="face" src="/images/face-sad.png">
+        Incorrect.
+        <a class="see-answer" href="javascript:void 0">See answer</a>
+    </span>
+    <span class="buttons">
+        {{#if explainUrl}}
+        <a class="explain simple-button" href="{{explainUrl}}">
+            <i class="icon-backward"></i>
+            Explain again
+        </a>
+        {{/if}}
+        <a class="skip simple-button" href="javascript:void 0">
+            Skip
+        </a>
+        <button type="submit" class="submit simple-button green">
+            Submit
+        </button>
+    </span>
+</div>

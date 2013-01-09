@@ -1,0 +1,17 @@
+<div class="layer backdrop videoframe">
+    <div class="boxbound-table"> {{! needed so that cell can be width 100%}}
+        <div class="boxbound-cell"> {{! needed for vertical-align middle}}
+            <img class="boxbound" src="{{imgsrc}}">
+        </div>
+    </div>
+</div>
+
+<form class="layer controls">
+    {{! TODO(dmnd): Make this use the same coordinate system as the background image above. Right now it is fixed at 800px, centered.}}
+    <div class="fixedsize">
+        {{{questionHtml}}}
+    </div>
+    <div class="watermark-blocker">
+        {{{submitHtml}}}
+    </div>
+</form>
