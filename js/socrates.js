@@ -130,11 +130,7 @@ Socrates.QuestionView = Backbone.View.extend({
         _.extend(this, this.options);
         this.version = 1;
         this.loaded = false;
-        if (window.TempTemplates != null) {
-            this.template = TempTemplates[this.model.templateName()];
-        } else {
-            this.template = Templates.get(this.model.templateName());
-        }
+        this.template = this.model.get("template") || Templates.get(this.model.templateName());
 
         this.render();
     },
@@ -966,22 +962,29 @@ Socrates.Manager = (function() {
  * @return {Promise}    A promise that will be resolved when loading questions
  *                      is complete
  */
-Socrates.forView = function(view) {
-    var questionPkg = view.model.get("questionPackage");
-    PackageManager.registerDynamic(questionPkg);
-    return $.when(
-        // load the questions for this video
-        PackageManager.require(questionPkg.name),
-
-        // and wait for the view to be ready
+Socrates.forView = function(view, events) {
+    var promises = [
+        // wait for the view to be ready
         view.whenReady(),
 
         // also, load MathJax
         // TODO(dmnd): Only require MathJax when the question/video needs it
-        Socrates.requireMathJax()).then(function() {
+        Socrates.requireMathJax()
+    ];
+
+    if (!events) {
+        // load the questions for this video
+        var questionPkg = view.model.get("questionPackage");
+        PackageManager.registerDynamic(questionPkg);
+        promises.push(PackageManager.require(questionPkg.name));
+    }
+
+    return $.when.apply(null, promises).then(function() {
+            if (!events) {
+                var id = view.model.get("youtubeId");
+                events = new Backbone.Collection(Socrates.Data[id].Events);
+            }
             // create a manager to handle state transitions
-            var id = view.model.get("youtubeId");
-            var events = new Backbone.Collection(Socrates.Data[id].Events);
             var manager = new Socrates.Manager(view, events);
 
             // this reference is needed by Socrates.potentialBookmark

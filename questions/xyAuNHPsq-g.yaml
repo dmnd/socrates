@@ -1,0 +1,424 @@
+--- !bookmark
+time: 0m0s
+title: What is a matrix?
+
+--- !bookmark
+time: 0m59s
+title: Dimensions of a matrix
+
+---
+time: 2m5.7s
+id: 1 # TODO(dmnd): get rid of ids?
+title: Dimensions of a matrix
+# TODO(dmnd): replace this with a simple link to a timestamp
+nested: dimensions-of-a-matrix
+correctData: {rows: "4", cols: "5"}
+template: |
+  <div class="layer backdrop whiteout"></div>
+  <div class="layer controls">
+    <form class="popout">
+      <a class="close" href="javascript:void 0">&times;</a>
+      <p>What are the dimensions of this matrix?</p>
+
+      <div class="equation">
+      <code>
+        M =
+        \begin{bmatrix}
+        5 & 0 & 0 & 1 & 5 \\
+        4 & 8 & 78 & 77 & 10 \\
+        1 & 1 & 2 & 3 & 2 \\
+        1 & 5 & 10 & 65 & 98
+        \end{bmatrix}
+      </code>
+      </div>
+
+      <p>
+        <code>M</code> is a
+        <input type="text" name="rows" placeholder="?" style="width: 2em">
+        by
+        <input type="text" name="cols" placeholder="?" style="width: 2em">
+        matrix.
+      </p>
+
+      {{>submit-area}}
+    </form>
+  </div>
+
+
+--- !bookmark
+time: 2m6s
+title: Referencing elements in a matrix
+
+---
+time: 3m20s
+id: 2
+title: Referencing elements in a matrix
+nested: referencing-elements-in-a-matrix
+correctData: {answer: "2"}
+template: |
+  {{#videoframeQuestion submitKind="submit-area"}}
+    <div class="label" style="left: 484px; top: 228px; ">Enter the value at A[1,3] above.</div>
+    <div class="inputtext" style="position: absolute; width: 25px; height: 25px; left: 639px; top: 147px; ">
+    <input type="text" name="answer" placeholder="?">
+    </div>
+    <div class="label" style="left: 599px; top: 151px; ">=</div>
+  {{/videoframeQuestion}}
+
+
+--- !bookmark
+time: 3m28s
+title: What are matrices used for?
+
+---
+time: 4m23.9s
+id: 3
+title: What are matrices used for?
+nested: what-are-matrices-used-for
+correctData: {answer: [true, true, true, true, true, true]}
+template: |
+  <div class="layer backdrop whiteout"></div>
+  <div class="layer controls">
+    <form class="popout">
+      <a class="close" href="javascript: void 0">&times;</a>
+      <p>Sal gave us some examples of what matrices are used for. Let's see if we can think of some other uses.</p>
+      <p>Check the items below if you think matrices were used to help create them.</p>
+
+      <label class="checkbox"><input type="checkbox" name="answer"> Google's search engine</label>
+      <label class="checkbox"><input type="checkbox" name="answer"> Calculating a satellite's orbit</label>
+      <label class="checkbox"><input type="checkbox" name="answer"> Recording music to mp3 format</label>
+      <label class="checkbox"><input type="checkbox" name="answer"> Making a Pixar movie like Finding Nemo</label>
+      <label class="checkbox"><input type="checkbox" name="answer"> Moving a robot arm</label>
+      <label class="checkbox"><input type="checkbox" name="answer"> This website!</label>
+
+      {{>submit-area}}
+    </form>
+  </div>
+
+
+--- !bookmark
+time: 4m42s
+title: Defining matrix addition
+
+---
+time: 6m31s
+id: 4
+title: Defining matrix addition
+nested: defining-matrix-addition
+template: |
+  <div class="layer backdrop whiteout"></div>
+  <div class="layer controls">
+    <form class="popout">
+      <a class="close" href="javascript: void 0">&times;</a>
+      <p>If you were the human that defined matrix addition, how would you define it?</p>
+      <p>For matrices <code>A</code> and <code>B</code>, choose a result for <code>A + B</code> from the options below.</p>
+      <div class="equation">
+      <code>
+        A =
+        \begin{bmatrix}
+        3 & -1 \\
+        2 & 0
+        \end{bmatrix}
+        \hspace{20pt}
+        B =
+        \begin{bmatrix}
+        -7 & 2 \\
+        3 & 5
+        \end{bmatrix}
+      </code>
+      </div>
+
+      <label class="radio inline">
+        <input type="radio" name="answer" value="0">
+        <code>
+          A' =
+          \begin{bmatrix}
+          -4 & 1 \\
+          5 & 5
+          \end{bmatrix}
+        </code>
+      </label>
+      <label class="radio inline">
+        <input type="radio" name="answer" value="1">
+        <code>
+          B' =
+          \begin{bmatrix}
+          8 & 2 \\
+          4 & -7
+          \end{bmatrix}
+        </code>
+      </label>
+      <label class="radio inline">
+        <input type="radio" name="answer" value="2">
+        <code>
+          C =
+          \begin{bmatrix}
+          3 & -1 & -7 & 2 \\
+          2 & 0 & 3 & 5
+          \end{bmatrix}
+        </code>
+      </label>
+      <label class="radio inline">
+        <input type="radio" name="answer" value="3">
+        <code>
+          D =
+          \begin{bmatrix}
+          3 & -1 \\
+          2 & 0 \\
+          -7 & 2 \\
+          3 & 5
+          \end{bmatrix}
+        </code>
+      </label>
+
+      {{>submit-area}}
+    </form>
+  </div>
+
+
+--- !bookmark
+time: 6m31s
+title: Matrix addition
+
+--- !bookmark
+time: 7m39s
+title: Commutativity of matrix addition
+
+---
+time: 8m11s
+id: 5
+title: Commutativity of matrix addition
+nested: commutativity-of-matrix-addition
+template: |
+  <div class="layer backdrop whiteout"></div>
+  <div class="layer controls">
+  <form class="popout">
+    <a class="close" href="javascript: void 0">&times;</a>
+    <p>When you defined matrix addition in the <a href="#defining-matrix-addition">previous question</a>, did A + B turn out to be the same thing as B + A? In other words, was your definition of matrix addition commutative?</p>
+    <div class="equation">
+    <code>
+    A =
+    \begin{bmatrix}
+    3 & -1 \\
+    2 & 0
+    \end{bmatrix}
+    \hspace{20pt}
+    B =
+    \begin{bmatrix}
+    -7 & 2 \\
+    3 & 5
+    \end{bmatrix}
+    </code>
+    </div>
+
+    <label class="radio inline"><input type="radio" name="answer" value="yes"> Yes</label>
+    <label class="radio inline"><input type="radio" name="answer" value="no"> No</label>
+
+    {{>submit-area}}
+  </form>
+  </div>
+
+---
+time: 8m11s
+id: 6
+title: Matrix addition
+correctData: {answer: [[80, 23], [13, 25]]}
+template: |
+  <div class="layer backdrop whiteout"></div>
+  <div class="layer controls">
+    <form class="popout">
+      <a class="close" href="javascript: void 0">&times;</a>
+      <p>Let's see if you can add matrices. What is <code>C + D</code>?</p>
+
+      <div style="text-align: center">
+      <code>
+        C =
+        \begin{bmatrix}
+        32 & 11 \\
+        12 & 25
+        \end{bmatrix}
+        \hspace{20pt}
+        D =
+        \begin{bmatrix}
+        48 & 12 \\
+        1 & 0
+        \end{bmatrix}
+      </code>
+      </div>
+
+      <div style="text-align: center">
+        <code>C + D = </code>
+
+        <table class="matrix-input" name="answer">
+          <tbody>
+            <tr>
+              <td><input type="text" placeholder="?" style="width: 2em"></td>
+              <td><input type="text" placeholder="?" style="width: 2em"></td>
+            </tr>
+            <tr>
+              <td><input type="text" placeholder="?" style="width: 2em"></td>
+              <td><input type="text" placeholder="?" style="width: 2em"></td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+
+      {{>submit-area}}
+    </form>
+  </div>
+
+--- !bookmark
+time: 8m11s
+title: Matrix subtraction
+
+--- !bookmark
+time: 9m44s
+title: Matrices that can be added
+
+---
+time: 11m17s
+id: 8
+title: Matrices that can be added
+nested: matrices-that-can-be-added
+correctData: {answer: [false, false, true, true, false]}
+template: |
+  <div class="layer backdrop whiteout"></div>
+  <div class="layer controls">
+    <form class="popout">
+      <a class="close" href="javascript: void 0">&times;</a>
+      <div class="equation">
+      <code>
+        A =
+        \begin{bmatrix}
+        3 & -1 & 9 \\
+        2 & 0 & 0
+        \end{bmatrix}
+
+        \hspace{20pt}
+
+        B =
+        \begin{bmatrix}
+        -7 & 2 \\
+        3 & 5
+        \end{bmatrix}
+
+        \hspace{20pt}
+
+        C =
+        \begin{bmatrix}
+        -7 & 2 & 4\\
+        3 & 5 & 8
+        \end{bmatrix}
+
+        \hspace{20pt}
+
+        D =
+        \begin{bmatrix}
+        -7 & 2 \\
+        3 & 5
+
+        \end{bmatrix}
+
+      </code>
+      </div>
+      <p>Given the above matrices, which of the following expressions are valid examples of matrix addition? Check the box if it's possible to add the two matrices.</p>
+
+      <label class="checkbox inline"><input type="checkbox" name="answer"><code>A+B</code></label>
+      <label class="checkbox inline"><input type="checkbox" name="answer"><code>D+A</code></label>
+      <label class="checkbox inline"><input type="checkbox" name="answer"><code>A+C</code></label>
+      <label class="checkbox inline"><input type="checkbox" name="answer"><code>B+D</code></label>
+      <label class="checkbox inline"><input type="checkbox" name="answer"><code>C+D</code></label>
+
+      {{>submit-area}}
+    </form>
+  </div>
+
+--- !bookmark
+time: 11m17s
+title: Matrix terminology
+
+---
+time: 11m50s
+id: 9
+title: Matrix terminology
+nested: matrix-terminology
+correctData: {answer: {
+  "scalar": {"scalar": true, "row-vector": false, "column-vector": false, "matrix": false},
+  "column-vector": {"scalar": false, "row-vector": false, "column-vector": true, "matrix": true},
+  "row-vector": {"scalar": false, "row-vector": true, "column-vector": false, "matrix": true},
+  "matrix": {"scalar": false, "row-vector": false, "column-vector": false, "matrix": true}
+}}
+template: |
+  <div class="layer backdrop whiteout"></div>
+  <div class="layer controls">
+    <form class="popout" style="margin-top: 5px">
+      <a class="close" href="javascript: void 0">&times;</a>
+      <p>Sal introduced us to some new terms during this video. Let's see if you can remember them!</p>
+      <p>Fill in the grid below. Check the box if the object in the first row matches the term in the column header.</p>
+
+      <table class="table centered checkbox-grid">
+        <thead>
+          <tr>
+            <th></th>
+            <th name="scalar">Scalar</th>
+            <th name="row-vector">Row vector</th>
+            <th name="column-vector">Column vector</th>
+            <th name="matrix">Matrix</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr name="column-vector">
+            <td>
+              <code>
+                \begin{bmatrix}
+                1 \\ 2 \\ 3
+                \end{bmatrix}
+              </code>
+            </td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+          </tr>
+          <tr name="scalar">
+            <td>
+              <code>1</code>
+            </td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+          </tr>
+          <tr name="row-vector">
+            <td>
+              <code>
+                \begin{bmatrix}
+                1 & 2 & 3 & 4
+                \end{bmatrix}
+              </code>
+            </td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+          </tr>
+          <tr name="matrix">
+            <td>
+              <code>
+                \begin{bmatrix}
+                1 & 2 \\
+                3 & 4
+                \end{bmatrix}
+              </code>
+            </td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      {{>submit-area}}
+    </form>
+  </div>

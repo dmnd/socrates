@@ -2,6 +2,15 @@
 <html>
 <head>
 <title>Socrates static test page</title>
+</head>
+
+<body>
+    <form>
+        <label>Youtube id: <input type="text" name="v"></input></label><br>
+        <label>Questions url: <input type="text" name="q"></input></label>
+        <button type="submit">Load</button>
+    </form>
+
 
 <!-- PackageManager dependencies -->
 <script src="/javascript/shared-package/jquery.js"></script>
@@ -26,29 +35,74 @@ var KA_TEST = {
 };
 </script>
 
+<!-- editor-specific code -->
+<script src="js/js-yaml.js"></script>
 
 <script>
-var requireDependencies = function(callback) {
-    var PM = PackageManager;
-    PM.register("socrates.css", "socrates.js");
-
-    var deps = ["shared.css", "video.css", "video.js"];
-    PM.register.apply(PM, deps).then(function() {
-        PM.require.apply(PM, deps).then(callback);
+// todo(dmnd): build this into PackageManager
+var regreq = function() {
+    var deps = Array.prototype.slice.call(arguments);
+    return PackageManager.register.apply(PackageManager, deps).pipe(function() {
+        return PackageManager.require.apply(PackageManager, deps);
     });
 };
 
-var setup = function(youtubeId, callback) {
-    requireDependencies(function() {
+var createVideoView = function(youtubeId) {
+    return regreq("shared.css", "video.css", "video.js").pipe(function() {
         var videoView = new VideoView({youtubeId: youtubeId});
         $("body").append(videoView.el);
-        videoView.whenReady().then(_.bind(callback, null, videoView));
+        return videoView.whenReady();
     });
 };
 
-setup("-a_w0_VAo6U", function(vv) {
-    window.vv = vv;
+jsyaml.addConstructor("!bookmark", function(node) {
+    var o = this.constructMapping(node);
+    o.kind = "bookmark";
+    return o;
 });
+
+var getSocratesEvents = function(url, youtubeId) {
+    return $.get(url).pipe(function(yaml) {
+        docs = [];
+        jsyaml.loadAll(yaml, function(r) {docs.push(r);});
+        return docs;
+    }).pipe(function(docs) {
+        return regreq("socrates.css", "socrates.js").pipe(function() {
+            return _.map(docs, function(doc) {
+                if (doc.kind === "bookmark") {
+                    return new Socrates.Bookmark(doc);
+                } else {
+                    doc.template = Handlebars.compile(doc.template);
+                    doc.youtubeId = youtubeId;
+                    return new Socrates.Question(doc);
+                }
+            });
+        });
+    });
+};
+
+
+regreq("shared.js").then(function() {
+    var youtubeId = "xyAuNHPsq-g";
+    var qs = parseQueryString();
+    if ("v" in qs) {
+        youtubeId = qs["v"];
+    }
+
+    var url = "/socrates/questions/" + youtubeId + ".yaml";
+    if ("q" in qs) {
+        url = qs["q"];
+    }
+    $("input[name=v]").val(youtubeId);
+    $("input[name=q]").val(url);
+
+
+    $.when(createVideoView(youtubeId), getSocratesEvents(url, youtubeId)).
+    then(function(view, events) {
+        Socrates.forView(view, new Backbone.Collection(events));
+    });
+});
+
 </script>
-</head>
+</body>
 </html>
