@@ -1,17 +1,7 @@
---- !bookmark
-time: 0m0s
-title: What is a matrix?
-
---- !bookmark
-time: 0m59s
-title: Dimensions of a matrix
-
----
 time: 2m5.7s
 id: 1 # TODO(dmnd): get rid of ids?
 title: Dimensions of a matrix
-# TODO(dmnd): replace this with a simple link to a timestamp
-nested: dimensions-of-a-matrix
+explainAgain: 0m59s
 correctData: {rows: "4", cols: "5"}
 template: |
   <div class="layer backdrop whiteout"></div>
@@ -44,16 +34,11 @@ template: |
     </form>
   </div>
 
-
---- !bookmark
-time: 2m6s
-title: Referencing elements in a matrix
-
 ---
 time: 3m20s
 id: 2
 title: Referencing elements in a matrix
-nested: referencing-elements-in-a-matrix
+explainAgain: 2m6s
 correctData: {answer: "2"}
 template: |
   {{#videoframeQuestion submitKind="submit-area"}}
@@ -64,16 +49,11 @@ template: |
     <div class="label" style="left: 599px; top: 151px; ">=</div>
   {{/videoframeQuestion}}
 
-
---- !bookmark
-time: 3m28s
-title: What are matrices used for?
-
 ---
 time: 4m23.9s
 id: 3
 title: What are matrices used for?
-nested: what-are-matrices-used-for
+explainAgain: 3m28s
 correctData: {answer: [true, true, true, true, true, true]}
 template: |
   <div class="layer backdrop whiteout"></div>
@@ -94,16 +74,11 @@ template: |
     </form>
   </div>
 
-
---- !bookmark
-time: 4m42s
-title: Defining matrix addition
-
 ---
 time: 6m31s
 id: 4
 title: Defining matrix addition
-nested: defining-matrix-addition
+explainAgain: 4m42s
 template: |
   <div class="layer backdrop whiteout"></div>
   <div class="layer controls">
@@ -174,20 +149,11 @@ template: |
     </form>
   </div>
 
-
---- !bookmark
-time: 6m31s
-title: Matrix addition
-
---- !bookmark
-time: 7m39s
-title: Commutativity of matrix addition
-
 ---
 time: 8m11s
 id: 5
 title: Commutativity of matrix addition
-nested: commutativity-of-matrix-addition
+explainAgain: 7m39s
 template: |
   <div class="layer backdrop whiteout"></div>
   <div class="layer controls">
@@ -267,19 +233,11 @@ template: |
     </form>
   </div>
 
---- !bookmark
-time: 8m11s
-title: Matrix subtraction
-
---- !bookmark
-time: 9m44s
-title: Matrices that can be added
-
 ---
 time: 11m17s
 id: 8
 title: Matrices that can be added
-nested: matrices-that-can-be-added
+explainAgain: 9m44s
 correctData: {answer: [false, false, true, true, false]}
 template: |
   <div class="layer backdrop whiteout"></div>
@@ -333,15 +291,11 @@ template: |
     </form>
   </div>
 
---- !bookmark
-time: 11m17s
-title: Matrix terminology
-
 ---
 time: 11m50s
 id: 9
 title: Matrix terminology
-nested: matrix-terminology
+explainAgain: 11m17s
 correctData: {answer: {
   "scalar": {"scalar": true, "row-vector": false, "column-vector": false, "matrix": false},
   "column-vector": {"scalar": false, "row-vector": false, "column-vector": true, "matrix": true},

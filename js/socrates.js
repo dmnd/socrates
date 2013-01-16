@@ -136,8 +136,13 @@ Socrates.QuestionView = Backbone.View.extend({
     },
 
     render: function() {
+        var explainLink;
+        if (this.model.get("explainAgain")) {
+            explainLink = "#" + this.model.slug().slice(0, -2);
+        }
+
         this.$el.html(this.template({
-            explainUrl: this.model.get("nested"),
+            explainUrl: explainLink,
             imgsrc: this.imageUrl()
         }));
 
@@ -150,11 +155,6 @@ Socrates.QuestionView = Backbone.View.extend({
             $(window).on("resize", this.onResize);
         }
 
-        // linkify the explain button
-        var parent = this.model.get("nested");
-        if (parent) {
-            this.$(".simple-button.explain").attr("href", "#" + parent);
-        }
         this.loaded = true;
 
         // render all latex

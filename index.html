@@ -78,7 +78,7 @@ var getSocratesEvents = function(url, youtubeId) {
         return docs;
     }).pipe(function(docs) {
         return regreq("socrates.css", "socrates.js").pipe(function() {
-            return _.map(docs, function(doc) {
+            var collapsed = _.map(docs, function(doc) {
                 if (doc.kind === "bookmark") {
                     return new Socrates.Bookmark(doc);
                 } else {
@@ -87,6 +87,19 @@ var getSocratesEvents = function(url, youtubeId) {
                     return new Socrates.Question(doc);
                 }
             });
+
+            var expanded = [];
+            _.each(collapsed, function(i) {
+                var t = i.get("explainAgain");
+                if (t) {
+                    expanded.push(new Socrates.Bookmark({
+                        time: t,
+                        title: i.get("title")
+                    }));
+                }
+                expanded.push(i);
+            });
+            return expanded;
         });
     });
 };
