@@ -1,6 +1,5 @@
 time: 2m5.7s
 id: 1 # TODO(dmnd): get rid of ids?
-title: Dimensions of a matrix
 explainAgain: 0m59s
 correctData: {rows: "4", cols: "5"}
 template: |
@@ -37,7 +36,6 @@ template: |
 ---
 time: 3m20s
 id: 2
-title: Referencing elements in a matrix
 explainAgain: 2m6s
 correctData: {answer: "2"}
 template: |
@@ -52,7 +50,6 @@ template: |
 ---
 time: 4m23.9s
 id: 3
-title: What are matrices used for?
 explainAgain: 3m28s
 correctData: {answer: [true, true, true, true, true, true]}
 template: |
@@ -77,7 +74,6 @@ template: |
 ---
 time: 6m31s
 id: 4
-title: Defining matrix addition
 explainAgain: 4m42s
 template: |
   <div class="layer backdrop whiteout"></div>
@@ -152,7 +148,6 @@ template: |
 ---
 time: 8m11s
 id: 5
-title: Commutativity of matrix addition
 explainAgain: 7m39s
 template: |
   <div class="layer backdrop whiteout"></div>
@@ -186,7 +181,6 @@ template: |
 ---
 time: 8m11s
 id: 6
-title: Matrix addition
 correctData: {answer: [[80, 23], [13, 25]]}
 template: |
   <div class="layer backdrop whiteout"></div>
@@ -236,7 +230,6 @@ template: |
 ---
 time: 11m17s
 id: 8
-title: Matrices that can be added
 explainAgain: 9m44s
 correctData: {answer: [false, false, true, true, false]}
 template: |
@@ -294,7 +287,6 @@ template: |
 ---
 time: 11m50s
 id: 9
-title: Matrix terminology
 explainAgain: 11m17s
 correctData: {answer: {
   "scalar": {"scalar": true, "row-vector": false, "column-vector": false, "matrix": false},

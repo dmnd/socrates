@@ -41,7 +41,7 @@ Socrates.Bookmark = Backbone.Model.extend({
     },
 
     slug: function() {
-        return _.str.slugify(this.get("title"));
+        return this.get("time");
     },
 
     toJSON: function() {
@@ -138,7 +138,7 @@ Socrates.QuestionView = Backbone.View.extend({
     render: function() {
         var explainLink;
         if (this.model.get("explainAgain")) {
-            explainLink = "#" + this.model.slug().slice(0, -2);
+            explainLink = "#" + this.model.get("explainAgain");
         }
 
         this.$el.html(this.template({
@@ -671,7 +671,6 @@ Socrates.Nav = Backbone.View.extend({
             .map(function(q) {
                 var pc = q.seconds() / this.options.videoDuration * 100;
                 return {
-                    title: q.get("title"),
                     time: q.get("time"),
                     slug: q.slug(),
                     percentage: pc,
@@ -907,12 +906,7 @@ Socrates.Manager = (function() {
         }
         var modifier = parts[1];
 
-        // if no modifier, default to question
-        if (!modifier) {
-            modifier = "q";
-        }
-
-        if (modifier !== "q") {
+        if (modifier && modifier !== "q") {
             id = id.replace(/\/\w$/, "/q");
         }
 
