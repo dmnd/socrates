@@ -7,11 +7,15 @@
 .video {
     width: 800px;
 }
+
+#data-source input[name=q] {
+    width: 300px;
+}
 </style>
 </head>
 
 <body>
-    <form>
+    <form id="data-source">
         <label>Youtube id: <input type="text" name="v"></input></label><br>
         <label>Questions url: <input type="text" name="q"></input></label>
         <button type="submit">Load</button>
@@ -99,8 +103,8 @@ regreq("shared.js").then(function() {
     if ("q" in qs) {
         url = qs["q"];
     }
-    $("input[name=v]").val(youtubeId);
-    $("input[name=q]").val(url);
+    $("#data-source input[name=v]").val(youtubeId);
+    $("#data-source input[name=q]").val(url);
 
 
     $.when(createVideoView(youtubeId), getSocratesEvents(url, youtubeId)).
