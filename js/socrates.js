@@ -128,7 +128,6 @@ Socrates.QuestionView = Backbone.View.extend({
 
     initialize: function() {
         _.extend(this, this.options);
-        this.version = 1;
         this.loaded = false;
         this.template = this.model.get("template") || Templates.get(this.model.templateName());
 
@@ -507,8 +506,6 @@ Socrates.QuestionView = Backbone.View.extend({
         return {
             time: this.model.get("time"),
             youtubeId: this.model.get("youtubeId"),
-            id: this.model.get("id"),
-            version: this.version,
             correct: this.isCorrect(data),
             data: data,
             timeDisplayed: timeDisplayed
@@ -516,8 +513,7 @@ Socrates.QuestionView = Backbone.View.extend({
     },
 
     validateResponse: function(response) {
-        requiredProps = ["id", "version", "correct", "data", "youtubeId",
-            "time"];
+        requiredProps = ["correct", "data", "youtubeId", "time"];
         var hasAllProps = _.all(requiredProps, function(prop) {
             return response[prop] != null;
         });
