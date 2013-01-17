@@ -1,0 +1,111 @@
+time: 2m4.5s
+explainAgain: 0m50.5s
+correctData: {answer: "1"}
+template: |
+  <div class="layer backdrop whiteout"></div>
+  <div class="layer controls">
+    <form class="popout">
+      <a class="close" href="javascript:void 0">&times;</a>
+      <p>What muscle is below the heart?</p>
+
+      <label class="radio ">
+        <input type="radio" name="answer" value="1">
+        Diaphragm
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="2">
+        Deltoid
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="3">
+        Right Lung
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="4">
+        Left Lung
+      </label>
+      {{>submit-area}}
+    </form>
+  </div>
+
+---
+time: 4m32.3s
+explainAgain: 3m25s
+correctData: {answer: "4"}
+explanation: "Blood flowing through vessels next to the cells can transport oxygen and nutrients to cells and can carry away carbon dioxide and other wastes. The heart is a pump which allows blood to continuously flow through vessels. When the heart no longer pumps, the cell can't receive what it needs and wastes build up around it."
+template: |
+  <div class="layer backdrop whiteout"></div>
+  <div class="layer controls">
+    <form class="popout">
+      <a class="close" href="javascript:void 0">&times;</a>
+      <p>Why do cells need the heart to pump blood?</p>
+      <p>Cells need...</p>
+      <label class="radio ">
+        <input type="radio" name="answer" value="1">
+        oxygen delivered to them
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="2">
+        nutrients (example: glucose)  delivered to them
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="3">
+        waste (example: carbon dioxide) to be removed 
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="4">
+        all of the above
+      </label>
+      {{>submit-area}}
+    </form>
+  </div>
+
+---
+time: 5m22.5s
+explainAgain: 3m25s
+correctData: {answer: "3"}
+template: |
+  <div class="layer backdrop whiteout"></div>
+  <div class="layer controls">
+    <form class="popout">
+      <a class="close" href="javascript:void 0">&times;</a>
+      <p>If a patient has a blockage in an artery (so that blood cannot flow to a tissue), what would happen in the tissue that is no longer receiving blood flow?</p>
+      <p>Oxygen levels would...</p>
+
+      <label class="radio ">
+        <input type="radio" name="answer" value="1">
+        rise
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="2">
+        remain the same
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="3">
+        fall 
+      </label>
+      {{>submit-area}}
+    </form>
+  </div>
+
+---
+time: 9m33.5s
+explainAgain: 7m21s
+correctData: {answer: [true, false, true, true]}
+template: |
+  <div class="layer backdrop whiteout"></div>
+  <div class="layer controls">
+    <form class="popout">
+      <a class="close" href="javascript: void 0">&times;</a>
+      <p>Which of the following cells receive blood <strong>only</strong> through systemic circulation?</p>
+      <p>Check all that apply.</p>
+
+      <label class="checkbox"><input type="checkbox" name="answer"> Cardiac muscle cell</label>
+      <label class="checkbox"><input type="checkbox" name="answer"> Lung cell</label>
+      <label class="checkbox"><input type="checkbox" name="answer"> Brain cell</label>
+      <label class="checkbox"><input type="checkbox" name="answer"> Toe cell</label>
+
+      {{>submit-area}}
+    </form>
+  </div>
+
