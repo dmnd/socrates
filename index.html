@@ -81,8 +81,7 @@ var getSocratesEvents = function(url, youtubeId) {
     return $.get(url).pipe(function(yaml) {
         docs = [];
         jsyaml.loadAll(yaml, function(r) {docs.push(r);});
-        return docs;
-    }).pipe(function(docs) {
+
         return regreq("socrates.css", "socrates.js").pipe(function() {
             var collapsed = _.map(docs, function(doc) {
                 if (doc.kind === "bookmark") {
