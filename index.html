@@ -78,37 +78,10 @@ jsyaml.addConstructor("!bookmark", function(node) {
 });
 
 var getSocratesEvents = function(url, youtubeId) {
-    return $.get(url).pipe(function(yaml) {
-        docs = [];
-        jsyaml.loadAll(yaml, function(r) {docs.push(r);});
-
-        return regreq("socrates.css", "socrates.js").pipe(function() {
-            var collapsed = _.map(docs, function(doc) {
-                if (doc.kind === "bookmark") {
-                    return new Socrates.Bookmark(doc);
-                } else {
-                    doc.template = Handlebars.compile(doc.template);
-                    doc.youtubeId = youtubeId;
-                    return new Socrates.Question(doc);
-                }
-            });
-
-            var expanded = [];
-            _.each(collapsed, function(i) {
-                var t = i.get("explainAgain");
-                if (t) {
-                    expanded.push(new Socrates.Bookmark({
-                        time: t,
-                        title: i.get("title")
-                    }));
-                }
-                expanded.push(i);
-            });
-            return expanded;
-        });
+    return $.when($.get(url), regreq("socrates.js")).pipe(function(xhr) {
+        return Socrates.loadYaml(xhr[0], youtubeId);
     });
 };
-
 
 regreq("shared.js").then(function() {
     var youtubeId = "xyAuNHPsq-g";
@@ -124,12 +97,13 @@ regreq("shared.js").then(function() {
     $("#data-source input[name=v]").val(youtubeId);
     $("#data-source input[name=q]").val(url);
 
-
-    $.when(createVideoView(youtubeId), getSocratesEvents(url, youtubeId)).
-    then(function(view, events) {
-        Socrates.forView(view, new Backbone.Collection(events));
-        window.videoView = view;
-    });
+    $.when( createVideoView(youtubeId),
+            getSocratesEvents(url, youtubeId),
+            regreq("socrates.css")).
+        then(function(view, events) {
+            Socrates.forView(view, events);
+            window.videoView = view;
+        });
 });
 
 $("#show-response").on("click", function() {

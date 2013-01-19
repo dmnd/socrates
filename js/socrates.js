@@ -966,16 +966,14 @@ Socrates.forView = function(view, events) {
         // load the questions for this video
         var questionPkg = view.model.get("questionPackage");
         PackageManager.registerDynamic(questionPkg);
-        promises.push(PackageManager.require(questionPkg.name));
+        promises.push(PackageManager.require(questionPkg.name).pipe(function(yaml) {
+            return Socrates.loadYaml(yaml, view.model.get("youtubeId"));
+        }));
     }
 
-    return $.when.apply(null, promises).then(function() {
-            if (!events) {
-                var id = view.model.get("youtubeId");
-                events = new Backbone.Collection(Socrates.Data[id].Events);
-            }
+    return $.when.apply(null, promises).then(function(view, mj, promisedEvents) {
             // create a manager to handle state transitions
-            var manager = new Socrates.Manager(view, events);
+            var manager = new Socrates.Manager(view, events || promisedEvents);
 
             // this reference is needed by Socrates.potentialBookmark
             view.socratesManager = manager;
