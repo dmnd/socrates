@@ -2,6 +2,8 @@
 
 var jsyaml = require("js-yaml");
 var Handlebars = require("handlebars");
+
+
 var yamlToJS = function(rawYaml, youtubeId) {
     var docs = [];
     jsyaml.loadAll(rawYaml, function(r) {docs.push(r);});
@@ -28,19 +30,20 @@ var yamlToJS = function(rawYaml, youtubeId) {
     output.push("\"socrates-" + youtubeId + "-package\", ");
     output.push("[" + out.join(',\n') + "]");
     output.push(");");
-
     return output.join('');
 };
 
 
-// compile each yaml file to a js file.
-var file =  "questions/xyAuNHPsq-g.yaml";
-
 var path = require("path");
-var youtubeId = path.basename(file).slice(0, -".yaml".length);
-
 var fs = require("fs");
-var rawYaml = fs.readFileSync(file, 'utf-8');
+var glob = require("glob");
 
-var js = yamlToJS(rawYaml, youtubeId);
-fs.writeFileSync(file + ".js", js, 'utf-8');
+
+// compile each yaml file to a js file.
+glob.sync("questions/*.yaml").forEach(function(file) {
+    console.log(file);
+    var youtubeId = path.basename(file).slice(0, -".yaml".length);
+    var rawYaml = fs.readFileSync(file, 'utf-8');
+    var js = yamlToJS(rawYaml, youtubeId);
+    fs.writeFileSync(file + ".js", js, 'utf-8');
+});
