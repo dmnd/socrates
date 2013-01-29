@@ -3,18 +3,21 @@
 var jsyaml = require("js-yaml");
 var Handlebars = require("handlebars");
 
-
 var yamlToJS = function(rawYaml, youtubeId) {
     var docs = [];
-    jsyaml.loadAll(rawYaml, function(r) {docs.push(r);});
+    jsyaml.loadAll(rawYaml, function(r) {
+        r["youtubeId"] = youtubeId;
+        docs.push(r);
+    });
 
     var out = docs.map(function(e) {
         // hack hack hack!
         res = {};
         for (var k in e) {
             var k2 = JSON.stringify(k);
-            res[k2] = k === "template" ? Handlebars.precompile(e.template) :
-                JSON.stringify(e[k]);
+            res[k2] = k === "template" ?
+                "template(" + Handlebars.precompile(e.template) + ")" :
+                    JSON.stringify(e[k]);
         }
         return res;
     }).map(function(e) {
@@ -26,10 +29,13 @@ var yamlToJS = function(rawYaml, youtubeId) {
     });
 
     var output = [];
+    output.push("(function() {\n");
+    output.push("var template = Handlebars.template;\n");
     output.push("PackageManager.setLoadedAndExport(");
-    output.push("\"socrates-" + youtubeId + "-package\", ");
+    output.push("\"socrates-" + youtubeId + ".js\", ");
     output.push("[" + out.join(',\n') + "]");
-    output.push(");");
+    output.push(");\n");
+    output.push("})();\n");
     return output.join('');
 };
 
