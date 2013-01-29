@@ -1,1 +1,6 @@
 node_modules
+
+# build artifacts
+*.handlebars.js
+*.yaml.js
+_hashed-*
