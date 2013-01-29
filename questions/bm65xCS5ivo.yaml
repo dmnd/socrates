@@ -1,0 +1,79 @@
+time: 3m25s
+explainAgain: 0m56s
+correctData: {answer: [true, false, false, true]}
+Explanation: "Injury to the chordae tendinae or papillary muscles can cause abnormal backflow of blood from the ventricles to the atria during systole.  Recall that semilunar valves (aortic and tricuspid valves) do not have chordae tendinae or papillary muscles."
+template: |
+  <div class="layer backdrop whiteout"></div>
+  <div class="layer controls">
+    <form class="popout">
+      <a class="close" href="javascript: void 0">&times;</a>
+      <p>Injury to the chordae tendinae or the papillary muscles might cause which of the following?</p>
+      <p>Check all that apply.</p>
+
+      <label class="checkbox"><input type="checkbox" name="answer"> Flow of blood in the wrong direction during systole</label>
+      <label class="checkbox"><input type="checkbox" name="answer"> Flow of blood in the wrong direction during diastole</label>
+      <label class="checkbox"><input type="checkbox" name="answer"> Backflow of blood from the aorta to the Left Ventricle</label>
+      <label class="checkbox"><input type="checkbox" name="answer"> Backflow of blood from the ventricles to the atria during ventricular contraction</label>
+
+      {{>submit-area}}
+    </form>
+  </div>
+
+---
+time: 5m27s
+explainAgain: 3m26s
+correctData: {answer: "3"}
+template: |
+  <div class="layer backdrop whiteout"></div>
+  <div class="layer controls">
+    <form class="popout">
+      <a class="close" href="javascript:void 0">&times;</a>
+      <p>Where in the heart would you find a Ventricular Septal Defect (VSD)?</p>
+   
+      <label class="radio ">
+        <input type="radio" name="answer" value="1">
+        Papillary muscle
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="2">
+        Chordae Tendinae
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="3">
+        Membranous part of the interventricular septum
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="4">
+        Muscular part of the interventricular septum
+      </label>
+      {{>submit-area}}
+    </form>
+  </div>
+
+---
+time: 12m11s
+explainAgain: 7m15s
+correctData: {answer: "2"}
+template: |
+  <div class="layer backdrop whiteout"></div>
+  <div class="layer controls">
+    <form class="popout">
+      <a class="close" href="javascript:void 0">&times;</a>
+      <p>What is the name of the thick, muscular layer of the heart that generates the force needed to pump blood?</p>
+
+      <label class="radio ">
+        <input type="radio" name="answer" value="1">
+        Pericardium
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="2">
+        Myocardium
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="3">
+        Endocardium 
+      </label>
+      {{>submit-area}}
+    </form>
+  </div>
+

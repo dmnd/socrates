@@ -1,0 +1,108 @@
+time: 3m46s
+explainAgain: 1m0s
+correctData: {answer: [false, true, true, false, false, false]}
+Explanation: Blood exists the pulmonary trunk and flows into the Right and Left pulmonary artery.  Remember that arteries take blood away from the heart.
+template: |
+  <div class="layer backdrop whiteout"></div>
+  <div class="layer controls">
+    <form class="popout">
+      <a class="close" href="javascript: void 0">&times;</a>
+      <p>Blood from the pulmonary trunk flows immidiately into which of the following vessels?</p>
+      <p>Check all that apply.</p>
+
+      <label class="checkbox"><input type="checkbox" name="answer"> Left Atrium</label>
+      <label class="checkbox"><input type="checkbox" name="answer"> Right Pulmonary Artery</label>
+      <label class="checkbox"><input type="checkbox" name="answer"> Left Pulmonary Artery</label>
+      <label class="checkbox"><input type="checkbox" name="answer"> Right Pulmonary Vein</label>
+      <label class="checkbox"><input type="checkbox" name="answer"> Left Pulmonary Vein</label>
+      <label class="checkbox"><input type="checkbox" name="answer"> Right Ventricle</label>
+
+      {{>submit-area}}
+    </form>
+  </div>
+
+---
+time: 6m31s
+explainAgain: 5m35s
+correctData: {answer: "4"}
+template: |
+  <div class="layer backdrop whiteout"></div>
+  <div class="layer controls">
+    <form class="popout">
+      <a class="close" href="javascript:void 0">&times;</a>
+      <p>Which heart chamber serves as the pump for systemic circulation?</p>
+      <label class="radio ">
+        <input type="radio" name="answer" value="1">
+        Right Atrium
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="2">
+        Right Ventricle
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="3">
+        Left Atrium
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="4">
+        Left Ventricle
+      </label>
+      {{>submit-area}}
+    </form>
+  </div>
+
+---
+time: 8m14s
+explainAgain: 7m0s
+correctData: {answer: "3"}
+Explanation: "Red blood cells are cells, even though they lack a nucleus and mitochondria.  They rely on glycolysis (Oxygen-independent process) to make ATP which does not use up oxygen.  This allows them to transport oxygen without using it all up themselves. "
+template: |
+  <div class="layer backdrop whiteout"></div>
+  <div class="layer controls">
+    <form class="popout">
+      <a class="close" href="javascript:void 0">&times;</a>
+      <p>Red blood cells don't need oxygen because they...</p>
+
+      <label class="radio ">
+        <input type="radio" name="answer" value="1">
+        don't have proteins
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="2">
+        are not true cells
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="3">
+        produce ATP from glycolysis
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="2">
+        they produce their own oxygen
+      </label>
+      {{>submit-area}}
+    </form>
+  </div>
+
+---
+time: 12m24s
+explainAgain: 11m0s
+correctData: {answer: "2"}
+Explanation: "False.  You would expect to find mixing of blood from the systemic circulation and pulmonary circulation in the lungs. "
+template: |
+  <div class="layer backdrop whiteout"></div>
+  <div class="layer controls">
+    <form class="popout">
+      <a class="close" href="javascript:void 0">&times;</a>
+      <p>True or False: Blood from the systemic circulation does not mix with blood in the pulmonary circulation.</p>
+
+      <label class="radio ">
+        <input type="radio" name="answer" value="1">
+        True
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="2">
+        False
+      </label>
+      {{>submit-area}}
+    </form>
+  </div>

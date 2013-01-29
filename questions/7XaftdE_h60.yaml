@@ -1,0 +1,125 @@
+time: 2m30s
+explainAgain: 1m15s
+correctData: {answer: "1"}
+template: |
+  <div class="layer backdrop whiteout"></div>
+  <div class="layer controls">
+    <form class="popout">
+      <a class="close" href="javascript:void 0">&times;</a>
+      <p>Blood traveling back to your heart from your earlobe travels through which blood vessel?</p>
+
+      <label class="radio ">
+        <input type="radio" name="answer" value="1">
+        Superior Vena Cava
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="2">
+        Inferior Vena Cava
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="3">
+        Aorta
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="4">
+        Coronary Vein
+      </label>
+      {{>submit-area}}
+    </form>
+  </div>
+
+---
+time: 7m23s
+explainAgain: 5m10s
+correctData: {answer: "4"}
+explanation: "Blood flowing through vessels next to the cells can transport oxygen and nutrients to cells and can carry away carbon dioxide and other wastes. The heart is a pump which allows blood to continuously flow through vessels. When the heart no longer pumps, the cell can't receive what it needs and wastes build up around it."
+template: |
+  <div class="layer backdrop whiteout"></div>
+  <div class="layer controls">
+    <form class="popout">
+      <a class="close" href="javascript:void 0">&times;</a>
+      <p>Which of the following veins carries blood with relatively HIGH levels of oxygen?</p>
+      <label class="radio ">
+        <input type="radio" name="answer" value="1">
+        Coronary Vein
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="2">
+        Superior Vena Cava
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="3">
+        Inferior Vena Cava
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="4">
+        Pulmonary Vein
+      </label>
+      {{>submit-area}}
+    </form>
+  </div>
+
+---
+time: 6m51s
+explainAgain: 6m33s
+correctData: {answer: "3"}
+explanation: "The mitral valve is between the Left Atrium and the Left Ventricle and usually prevents blood from flowing backwards."
+template: |
+  <div class="layer backdrop whiteout"></div>
+  <div class="layer controls">
+    <form class="popout">
+      <a class="close" href="javascript:void 0">&times;</a>
+      <p>Heart valves prevent blood from flowing "backwards" through the heart.  If the mitral valve was absent, the blood would flow backwards from the...</p>
+      <p>Oxygen levels would...</p>
+
+      <label class="radio ">
+        <input type="radio" name="answer" value="1">
+        Left Ventricle to Right Atrium
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="2">
+        Left Atrium to Left Ventricle
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="3">
+        Left Ventricle to Left Atrium
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="4">
+        Right Ventricle to Left Atrium
+      </label>
+      {{>submit-area}}
+    </form>
+  </div>
+
+---
+time: 7m43s
+explainAgain: 6m56s
+correctData: {answer: "4"}
+template: |
+  <div class="layer backdrop whiteout"></div>
+  <div class="layer controls">
+    <form class="popout">
+      <a class="close" href="javascript:void 0">&times;</a>
+      <p>As blood flows through the heart, in what order does it pass through the valves?</p>
+
+      <label class="radio ">
+        <input type="radio" name="answer" value="1">
+        Tricuspid, Mitral, Pulmonary, Aortic
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="2">
+        Pulmonary, Tricuspid, Mitral, Aortic
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="3">
+        Aortic, Mitral, Pulmonary, Tricuspid
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="4">
+        Tricuspid, Pulmonary, Mitral, Aortic
+      </label>
+      {{>submit-area}}
+    </form>
+  </div>
+

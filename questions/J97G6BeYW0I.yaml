@@ -1,0 +1,68 @@
+time: 4m45s
+explainAgain: 3m22s
+correctData: {answer: "1"}
+template: |
+  <div class="layer backdrop whiteout"></div>
+  <div class="layer controls">
+    <form class="popout">
+      <a class="close" href="javascript:void 0">&times;</a>
+      <p>If Rishi goes back to his doctor and is told that his blood pressure is 131/83.  What do these numbers represent?</p>
+
+      <label class="radio ">
+        <input type="radio" name="answer" value="1">
+        131 is arterial systolic pressure, 83 is arterial diastolic pressure
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="2">
+        131 is arterial diastolic pressure, 83 is arterial systolic pressure
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="3">
+        131 is venous systolic pressure, 83 is venous diastolic pressure
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="4">
+        131 is venous diastolic pressure, 83 is venous systolic pressure
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="4">
+        131 is arterial pressure, 83 is venous pressure
+      </label>      <label class="radio ">
+        <input type="radio" name="answer" value="4">
+        131 is venous pressure, 83 is arterial pressure
+      </label>
+      {{>submit-area}}
+    </form>
+  </div>
+
+---
+time: 5m2s
+explainAgain: 4m48s
+correctData: {answer: "3"}
+explanation: "During one heart beat, about 1/3 of the time is spent in systole and 2/3 of the time is spent in diastole. Therefore, the heart spends about twice the amount of time in diastole as it does in systole. This means that diastole would last approximately: [2 x0.3 sec], or 0.6 seconds."
+template: |
+  <div class="layer backdrop whiteout"></div>
+  <div class="layer controls">
+    <form class="popout">
+      <a class="close" href="javascript:void 0">&times;</a>
+      <p>In one heart beat, if we assume that systole is 0.3 seconds, how long would you expect diastole to be?</p>
+      <label class="radio ">
+        <input type="radio" name="answer" value="1">
+        0.15 seconds
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="2">
+        0.3 seconds
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="3">
+        0.6 seconds
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="4">
+        1 second
+      </label>
+      {{>submit-area}}
+    </form>
+  </div>
+

@@ -1,0 +1,111 @@
+time: 2m20s
+explainAgain: 1m8s
+correctData: {answer: [false, true, false]}
+Explanation: "Arteries carry blood away from the heart, whereas veins bring blood back towards the heart.   Capillaries are very small and are only one cell thick, allowing for oxygen and nutrients to diffuse into the tissues and organs and waste to diffuse into the capillary."
+template: |
+  <div class="layer backdrop whiteout"></div>
+  <div class="layer controls">
+    <form class="popout">
+      <a class="close" href="javascript: void 0">&times;</a>
+      <p>Which of the following vessels allow oxygen to diffuse into tissues and organs?</p>
+      <p>Check all that apply.</p>
+
+      <label class="checkbox"><input type="checkbox" name="answer"> Arteries</label>
+      <label class="checkbox"><input type="checkbox" name="answer"> Capillaries</label>
+      <label class="checkbox"><input type="checkbox" name="answer"> Veins</label>
+
+      {{>submit-area}}
+    </form>
+  </div>
+
+---
+time: 7m6s
+explainAgain: 5m53s
+correctData: {answer: "1"}
+template: |
+  <div class="layer backdrop whiteout"></div>
+  <div class="layer controls">
+    <form class="popout">
+      <a class="close" href="javascript:void 0">&times;</a>
+      <p>If a patient's aortic blood pressure is 120mmHg, what pressure would you expect in the internal jugular vein (large vein that drains blood from the head/neck)?</p>
+
+      <label class="radio ">
+        <input type="radio" name="answer" value="1">
+        5mmHg
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="2">
+        120mmHg
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="3">
+        200mmHg
+      </label>
+      {{>submit-area}}
+    </form>
+  </div>
+
+---
+time: 7m53s
+explainAgain: 7m7s
+correctData: {answer: "5"}
+explanation: "The distribution of blood is approximately as follows: 5% in heart, 5% in capillaries, 10% in lungs, 15% in arteries, and 65% in veins."
+template: |
+  <div class="layer backdrop whiteout"></div>
+  <div class="layer controls">
+    <form class="popout">
+      <a class="close" href="javascript:void 0">&times;</a>
+      <p>Where is most blood located in the body?</p>
+      <label class="radio ">
+        <input type="radio" name="answer" value="1">
+        Heart
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="2">
+        Capillaries
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="3">
+        Lungs
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="4">
+        Arteries
+      </label>
+        <label class="radio ">
+        <input type="radio" name="answer" value="5">
+        Veins
+      </label>
+      {{>submit-area}}
+    </form>
+  </div>
+
+---
+time: 9m58s
+explainAgain: 8m48s
+correctData: {answer: "2"}
+Explanation: "Arterial pressure is much higher than venous pressure and this helps to push the blood forward, making valves unnecessary."  
+template: |
+  <div class="layer backdrop whiteout"></div>
+  <div class="layer controls">
+    <form class="popout">
+      <a class="close" href="javascript:void 0">&times;</a>
+      <p>Why don't arteries have valves?</p>
+
+      <label class="radio ">
+        <input type="radio" name="answer" value="1">
+        Arterial blood does not have to counteract gravity
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="2">
+        Arterial blood has greater pressure than venous blood
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="3">
+        Arterial blood is oxygenated 
+      </label>
+      {{>submit-area}}
+    </form>
+  </div>
+
+

@@ -1,0 +1,112 @@
+time: 1m33s
+explainAgain: 0m58s
+correctData: {answer: "1"}
+Explanation: "Normally blood enters both ventricles simultaneously, and exits simultaneously as well."
+template: |
+  <div class="layer backdrop whiteout"></div>
+  <div class="layer controls">
+    <form class="popout">
+      <a class="close" href="javascript:void 0">&times;</a>
+      <p>True or False: At the same time that blood goes from the Right atrium to the Right ventricle, blood also goes from the Left atrium to the Left ventricle?</p>
+
+      <label class="radio ">
+        <input type="radio" name="answer" value="1">
+        True
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="2">
+        False
+      </label>
+      {{>submit-area}}
+    </form>
+  </div>
+
+---
+time: 2m20s
+explainAgain: 1m40s
+correctData: {answer: "3"}
+explanation: "The Tricuspid valve separates the Right atrium from the Right ventricle and the Mitral valve separates the Left atrium from the Left ventricle. Therefore, in order for the atria to fill the ventricles concurrently, the Mitral and Tricuspid valves must be open at the same time."
+template: |
+  <div class="layer backdrop whiteout"></div>
+  <div class="layer controls">
+    <form class="popout">
+      <a class="close" href="javascript:void 0">&times;</a>
+      <p>Since both ventricles fill with blood simultaneously, which pairs of valves must be open together?</p>
+      <label class="radio ">
+        <input type="radio" name="answer" value="1">
+        Tricuspid and Pulmonary valves
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="2">
+        Aortic and Pulmonary valves
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="3">
+        Mitral and Tricuspid valves
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="4">
+        Pulmonary and Mitral valves
+      </label>
+      {{>submit-area}}
+    </form>
+  </div>
+
+---
+time: 8m9s
+explainAgain: 6m30s
+correctData: {answer: "1"}
+Explanation: "The audible noises heard in the heart sound is produced by the actual closing of valves. Therefore, S1 is the sound of the tricuspid and mitral valves closing and S2 is the sound of the pulmonary and aortic valves closing."
+template: |
+  <div class="layer backdrop whiteout"></div>
+  <div class="layer controls">
+    <form class="popout">
+      <a class="close" href="javascript:void 0">&times;</a>
+      <p>What causes the second heart sound ("dub")?</p>
+      <p>The sound of...</p>
+
+      <label class="radio ">
+        <input type="radio" name="answer" value="1">
+        Pulmonary and Aortic valves snapping shut
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="2">
+        Pulmonary and Aortic valves opening up
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="3">
+        Tricuspid and Mitral valves snapping shut
+      </label>
+        <label class="radio ">
+        <input type="radio" name="answer" value="4">
+        Tricuspid and Mitral valves opening up
+         
+      </label>
+      {{>submit-area}}
+    </form>
+  </div>
+
+---
+time: 9m4s
+explainAgain: 8m21s
+correctData: {answer: "2"}
+Explanation: "Systole is the part of the heart cycle just before S2 (which is can also be thought of as the part of the heart cycle between S1 and S2).  During systole, the pulmonary and aortic valves are open and the ventricles are pumping blood out of the heart."
+template: |
+  <div class="layer backdrop whiteout"></div>
+  <div class="layer controls">
+    <form class="popout">
+      <a class="close" href="javascript:void 0">&times;</a>
+      <p>When is blood pumped out of the heart?</p>
+
+      <label class="radio ">
+        <input type="radio" name="answer" value="1">
+        Before S1
+      </label>
+      <label class="radio ">
+        <input type="radio" name="answer" value="2">
+        Before S2
+      </label>
+    
+      {{>submit-area}}
+    </form>
+  </div>
