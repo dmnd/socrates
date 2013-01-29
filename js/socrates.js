@@ -966,8 +966,19 @@ Socrates.forView = function(view, events) {
         // load the questions for this video
         var questionPkg = view.model.get("questionPackage");
         PackageManager.registerDynamic(questionPkg);
-        promises.push(PackageManager.require(questionPkg.name).pipe(function(yaml) {
-            return Socrates.loadYaml(yaml, view.model.get("youtubeId"));
+        promises.push(PackageManager.require(questionPkg.name).
+                                     pipe(function(maybeQuestions) {
+            if (_.isString(maybeQuestions)) {
+                // we're loading directly from a yaml file in dev mode
+                return Socrates.loadYaml(
+                    maybeQuestions, view.model.get("youtubeId"));
+            } else {
+                // we have precompiled questions.
+                return new Backbone.Collection(
+                    _.map(maybeQuestions, function(q) {
+                        return new Socrates.Question(q);
+                    }));
+            }
         }));
     }
 
