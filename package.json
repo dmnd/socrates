@@ -1,0 +1,11 @@
+{
+    "name": "socrates",
+    "version": "0.1.0",
+    "author": "Khan Academy",
+
+    "dependencies": {
+        "js-yaml": "1.x.x",
+        "handlebars": "1.0.5beta",
+        "glob": "3.1.x"
+    }
+}
