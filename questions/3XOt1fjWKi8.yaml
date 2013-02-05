@@ -1,4 +1,4 @@
-time: "0m24s",
+time: "0m24s"
 correctData: {answer: "bottom"}
 # todo(dmnd) Bring in questions from related exercise for the end
 # What fraction of this circle is shaded red? (recognizing fractions 0.5?)
@@ -19,4 +19,3 @@ template: |
             </p>
         </div>
     {{/videoframeQuestion}}
-

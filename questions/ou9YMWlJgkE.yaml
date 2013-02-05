@@ -1,4 +1,4 @@
-time: "4m25s",
+time: "4m25s"
 correctData: {answer: "5"}
 template: |
     {{#videoframeQuestion submitKind="submit-area"}}
@@ -13,7 +13,7 @@ template: |
     {{/videoframeQuestion}}
 
 ---
-time: "5m45s",
+time: "5m45s"
 correctData: {answer: "double"}
 template: |
     {{#videoframeQuestion submitKind="submit-area"}}

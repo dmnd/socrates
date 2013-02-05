@@ -1,5 +1,5 @@
 explainAgain: 0m0s
-time: "1m58s",
+time: "1m58s"
 correctData: {answer: "yes"}
 template: |
     {{#videoframeQuestion submitKind="submit-area"}}
@@ -11,7 +11,7 @@ template: |
     {{/videoframeQuestion}}
 ---
 explainAgain: 2m10s
-time: "3m41s",
+time: "3m41s"
 correctData: {numerator: "21", denominator: "35"}
 template: |
     {{#videoframeQuestion submitKind="submit-area-pre-no-answer"}}
@@ -27,7 +27,7 @@ template: |
     {{/videoframeQuestion}}
 ---
 # todo(dmnd) replace the following questions with the equivalent fractions exercise
-time: "5m09s",
+time: "5m09s"
 correctData: {answer: "15"}
 template: |
     {{#videoframeQuestion submitKind="submit-area-pre-no-answer"}}
@@ -40,7 +40,7 @@ template: |
         </div>
     {{/videoframeQuestion}}
 ---
-time: "5m48.5s",
+time: "5m48.5s"
 correctData: {answer: [true, false, true, false, false]}
 template: |
     <div class="layer backdrop whiteout"></div>

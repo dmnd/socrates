@@ -1,4 +1,4 @@
-time: "5m23s",
+time: "5m23s"
 correctData: {answer: [false, false, true, true, true]}
 template: |
     {{#videoframeQuestion submitKind="submit-area-pre"}}
@@ -24,7 +24,7 @@ template: |
     {{/videoframeQuestion}}
 
 ---
-time: "8m10s",
+time: "8m10s"
 correctData: {answer: "yes"}
 template: |
     <div class="layer backdrop whiteout"></div>

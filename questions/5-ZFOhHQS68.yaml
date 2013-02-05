@@ -1,4 +1,4 @@
-time: "0m36.8s",
+time: "0m36.8s"
 correctData: {answer: [true, false]}
 template: |
     <div class="layer backdrop whiteout"></div>
@@ -20,7 +20,7 @@ template: |
     </div>
 
 ---
-time: "3m36s",
+time: "3m36s"
 correctData: {answer: [false, true, true, false]}
 template: |
     <div class="layer backdrop whiteout"></div>
@@ -48,4 +48,3 @@ template: |
             {{>submit-area-pre}}
         </form>
     </div>
----

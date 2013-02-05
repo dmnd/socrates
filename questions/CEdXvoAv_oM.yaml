@@ -1,4 +1,4 @@
-time: "2m21s",
+time: "2m21s"
 correctData: {answer: "d"}
 template: |
     {{#videoframeQuestion submitKind="submit-area-pre"}}
@@ -27,5 +27,3 @@ template: |
             </label>
         </div>
     {{/videoframeQuestion}}
-
----

@@ -1,4 +1,4 @@
-time: "0m15s",
+time: "0m15s"
 correctData: {numerator: "3", denominator: "5"}
 template: |
     {{#videoframeQuestion submitKind="submit-area-pre"}}

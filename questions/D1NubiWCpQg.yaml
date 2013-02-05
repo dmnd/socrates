@@ -1,4 +1,4 @@
-time: "0m53s",
+time: "0m53s"
 correctData: {answer: [true, false, true, false]}
 template: |
     {{#videoframeQuestion submitKind="submit-area-pre"}}
@@ -19,5 +19,3 @@ template: |
             <input type="checkbox" name="answer">
         </div>
     {{/videoframeQuestion}}
-
----

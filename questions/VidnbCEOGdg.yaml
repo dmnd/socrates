@@ -1,4 +1,4 @@
-time: "0m6s",
+time: "0m6s"
 correctData: {"answer": "49"}
 template: |
     {{#videoframeQuestion submitKind="submit-area-pre-no-answer"}}
@@ -16,7 +16,7 @@ template: |
 
 ---
 explainAgain: 0m6s
-time: "1m53.5s",
+time: "1m53.5s"
 correctData: {"answer": "33"}
 template: |
     <div class="layer backdrop whiteout"></div>
@@ -37,5 +37,3 @@ template: |
             {{>submit-area}}
         </form>
     </div>
-
----
