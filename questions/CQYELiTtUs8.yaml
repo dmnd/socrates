@@ -1,0 +1,104 @@
+disabled: true
+time: "0m0.1s"
+correctData: {answer: "d"}
+template: |
+    <div class="layer backdrop whiteout"></div>
+    <div class="layer controls">
+        <form class="popout">
+            <a class="close" href="javascript: void 0">&times;</a>
+            <p>The surface of the planet Lubricon VI, which has no atmosphere, is perfectly flat and smooth. So smooth, in fact, that no object experiences friction as it glides across the surface of the planet.</p>
+            <p>At this very moment, a frozen sock is travelling across the surface at 1 km/h. What will happen to the sock? It will:</p>
+
+            <label class="radio">
+                <input type="radio" name="answer" value="a">
+                Slowly decelerate and come to rest.
+            </label>
+            <label class="radio">
+                <input type="radio" name="answer" value="b">
+                Quickly decelerate and come to rest.
+            </label>
+            <label class="radio">
+                <input type="radio" name="answer" value="c">
+                Accelerate to the speed of light.
+            </label>
+            <label class="radio">
+                <input type="radio" name="answer" value="d">
+                Move at a constant velocity, orbiting the planet for all eternity at an altitude of zero.
+            </label>
+            <label class="radio">
+                <input type="radio" name="answer" value="e">
+                Attain <a href="http://en.wikipedia.org/wiki/Sentience" target="_blank">sentience</a>.
+            </label>
+
+            {{>submit-area}}
+        </form>
+    </div>
+
+---
+time: "2m58.8s"
+correctData: {answer: "none"}
+template: |
+    {{#videoframeQuestion submitKind="submit-area"}}
+        <div class="qtip-question" style="width: 350px" data-qtip='{"position": {"my": "top center", "adjust": {"x": 445, "y": 145}}}'>
+            <p>What will happen if two people are pushing on opposite sides of the rock with equal force?</p>
+            <p>
+                <label class="radio"><input type="radio" name="answer" value="up"> The rock will move up</label>
+                <label class="radio"><input type="radio" name="answer" value="right"> The rock will move right</label>
+                <label class="radio"><input type="radio" name="answer" value="down"> The rock will move down</label>
+                <label class="radio"><input type="radio" name="answer" value="left"> The rock will move left</label>
+                <label class="radio"><input type="radio" name="answer" value="none"> None of the above</label>
+            </p>
+        </div>
+    {{/videoframeQuestion}}
+
+---
+time: "5m49s"
+correctData: {answer: [false, true, true, false]}
+template: |
+    <div class="layer backdrop whiteout"></div>
+    <div class="layer controls">
+        <form class="popout">
+            <a class="close" href="javascript: void 0">&times;</a>
+            <p>Newton's First Law tells us that an object stays at a constant velocity unless it is acted upon by an unbalanced force.</p>
+            <p>Image you're driving your car on the highway, just below the speed limit.</p>
+            <p>In order to keep the car travelling at a constant velocity, you need to keep your foot on the "accelerator" so that the engine continues to burn fuel.</p>
+            <p>What are the primary balancing forces that keep the car from accelerating forward in this situation?</p>
+
+            <label class="checkbox">
+                <input type="checkbox" name="answer">
+                Friction between tyres and road
+            </label>
+            <label class="checkbox">
+                <input type="checkbox" name="answer">
+                Air resistance
+            </label>
+            <label class="checkbox">
+                <input type="checkbox" name="answer">
+                Friction between moving parts in the car (engine, transmission, axles)
+            </label>
+            <label class="checkbox">
+                <input type="checkbox" name="answer">
+                The gravitational force of the car in front me
+            </label>
+
+            {{>submit-area}}
+        </form>
+    </div>
+
+---
+time: "9m30s"
+correctData: {answer: "none"}
+template: |
+    <div class="layer backdrop whiteout"></div>
+    <div class="layer controls">
+        <form class="popout">
+            <a class="close" href="javascript: void 0">&times;</a>
+            <p>Imagine you are standing on a huge rock that is moving really fast through a large space, but at a constant velocity. All you can see is the ground you are standing on, and blue sky. There is no sun, stars or clouds. How can you tell if you are moving?</p>
+
+            <label class="radio"><input type="radio" name="answer" value="up"> If gravity is holding me on the ground, the rock must be pushing from below. The rock &amp; I are moving upward.</label>
+            <label class="radio"><input type="radio" name="answer" value="none"> There is no way to tell if the rock &amp; I are moving.</label>
+            <label class="radio"><input type="radio" name="answer" value="stationary"> Because I can't see anything moving, we are not moving at all.</label>
+
+            {{>submit-area}}
+        </form>
+    </div>

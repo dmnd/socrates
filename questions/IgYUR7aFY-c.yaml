@@ -1,0 +1,23 @@
+time: "0m51s",
+correctData: {answer: [false, true, true, true]}
+template: |
+    {{#videoframeQuestion submitKind="submit-area-pre"}}
+        <div class="qtip-question" data-qtip='{"position": {"my": "left top", "adjust": {"x": 350, "y": 290}}}'>
+            <p>Let's see if you already know this:<br />
+            Click the checkbox next to the statements that are true.</p>
+        </div>
+        <div style="position: absolute; left: 17px; top: 34px;">
+            <input type="checkbox" name="answer">
+        </div>
+        <div style="position: absolute; left: 17px; top: 158px;">
+            <input type="checkbox" name="answer">
+        </div>
+        <div style="position: absolute; left: 17px; top: 290px;">
+            <input type="checkbox" name="answer">
+        </div>
+        <div style="position: absolute; left: 17px; top: 397px;">
+            <input type="checkbox" name="answer">
+        </div>
+    {{/videoframeQuestion}}
+
+---

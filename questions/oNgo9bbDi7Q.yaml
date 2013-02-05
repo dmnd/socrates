@@ -1,0 +1,48 @@
+time: "5m23s",
+correctData: {answer: [false, false, true, true, true]}
+template: |
+    {{#videoframeQuestion submitKind="submit-area-pre"}}
+        <div class="qtip-question" data-qtip='{"position": {"my": "left top", "adjust": {"x": 108, "y": 340}}}'>
+            <p>Let's see if you already know this.<br />
+            Click the checkbox next to the scenarios that have unbalanced (net) forces.</p>
+        </div>
+        <div style="position: absolute; left: 25px; top: 60px;">
+            <input type="checkbox" name="answer">
+        </div>
+        <div style="position: absolute; left: 230px; top: 60px;">
+            <input type="checkbox" name="answer">
+        </div>
+        <div style="position: absolute; left: 450px; top: 60px;">
+            <input type="checkbox" name="answer">
+        </div>
+        <div style="position: absolute; left: 90px; top: 300px;">
+            <input type="checkbox" name="answer">
+        </div>
+        <div style="position: absolute; left: 400px; top: 300px;">
+            <input type="checkbox" name="answer">
+        </div>
+    {{/videoframeQuestion}}
+
+---
+time: "8m10s",
+correctData: {answer: "yes"}
+template: |
+    <div class="layer backdrop whiteout"></div>
+    <div class="layer controls">
+        <form class="popout">
+            <a class="close" href="javascript: void 0">&times;</a>
+            <p>Mr. Hamster weighs 5N. While plumetting through the air, the resistance of the air applies a 5N upward force to him. Gravity and air resistance are the only forces acting on him. Are the forces acting on him balanced as he falls?</p>
+            <p>
+                <label class="radio inline">
+                    <input type="radio" name="answer" value="yes">
+                    Yes
+                </label>
+                <label class="radio inline">
+                    <input type="radio" name="answer" value="no">
+                    No
+                </label>
+            </p>
+
+            {{>submit-area}}
+        </form>
+    </div>

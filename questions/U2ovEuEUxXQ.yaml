@@ -1,0 +1,72 @@
+explainAgain: 0m0s
+time: "1m58s",
+correctData: {answer: "yes"}
+template: |
+    {{#videoframeQuestion submitKind="submit-area"}}
+        <div class="qtip-question" style="width: 300px" data-qtip='{"position": {"my": "bottom right", "adjust": {"x": 605, "y": 185}}}'>
+            <p>Based on Sal's drawing of the pie, do you think 4/8 of a pie is equivalent to a half a pie?</p>
+            <label class="radio inline"><input type="radio" name="answer" value="yes"> Yes</label>
+            <label class="radio inline"><input type="radio" name="answer" value="no"> No</label>
+        </div>
+    {{/videoframeQuestion}}
+---
+explainAgain: 2m10s
+time: "3m41s",
+correctData: {numerator: "21", denominator: "35"}
+template: |
+    {{#videoframeQuestion submitKind="submit-area-pre-no-answer"}}
+        <span class="fraction-input" style="width: 60px; position: absolute; left: 330px; top: 45px">
+            <input type="text" name="numerator" placeholder="?">
+            <hr>
+            <input type="text" name="denominator" placeholder="?">
+        </span>
+        <div class="qtip-question" data-qtip-target=".fraction-input" data-qtip='{"position": {"my": "left top", "at": "right middle"}}'>
+            <p>Let's practice this before Sal does it.</p>
+            <p>Write your answer here.</p>
+        </div>
+    {{/videoframeQuestion}}
+---
+# todo(dmnd) replace the following questions with the equivalent fractions exercise
+time: "5m09s",
+correctData: {answer: "15"}
+template: |
+    {{#videoframeQuestion submitKind="submit-area-pre-no-answer"}}
+        <div class="inputtext" style="position: absolute; width: 45px; height: 25px; left: 360px; top: 40px; ">
+            <input type="text" name="answer" placeholder="?">
+            <div class="qtip-question" data-qtip-target="input" data-qtip='{"position": {"my": "left top", "at": "right middle"}}'>
+                What value for the numerator will make<br>
+                these fractions equivalent?
+            </div>
+        </div>
+    {{/videoframeQuestion}}
+---
+time: "5m48.5s",
+correctData: {answer: [true, false, true, false, false]}
+template: |
+    <div class="layer backdrop whiteout"></div>
+    <div class="layer controls">
+        <form class="popout">
+            <a class="close" href="javascript: void 0">&times;</a>
+            <div class="equation">
+            <code>
+                A = \frac{3}{9}
+                \hspace{20pt}
+                B = \frac{15}{45}
+                \hspace{20pt}
+                C = \frac{2}{6}
+                \hspace{20pt}
+                D = \frac{1}{4}
+            </code>
+            </div>
+            <p>Which of the above fractions are equivalent?</p>
+            <p>Check all that apply.</p>
+
+            <label class="checkbox inline"><input type="checkbox" name="answer"> A and B</label>
+            <label class="checkbox inline"><input type="checkbox" name="answer"> A and D</label>
+            <label class="checkbox inline"><input type="checkbox" name="answer"> A and C</label>
+            <label class="checkbox inline"><input type="checkbox" name="answer"> C and D</label>
+            <label class="checkbox inline"><input type="checkbox" name="answer"> All are equivalent</label>
+
+            {{>submit-area}}
+        </form>
+    </div>

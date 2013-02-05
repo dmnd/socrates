@@ -1,0 +1,87 @@
+time: "0m4s",
+correctData: {answer: "none"}
+template: |
+    {{#videoframeQuestion submitKind="submit-area-pre"}}
+        <div class="qtip-question" data-qtip='{"position": {"my": "left top", "adjust": {"x": 280, "y": 95}}}'>
+            <p>Let's see if you can work this out first.</p>
+            <p>Which of the following is <code>\dfrac{48}{64}</code> in lowest terms?</p>
+
+            <label class="radio inline">
+                <input type="radio" name="answer" value="a">
+                <code>\dfrac{48}{32}</code>
+            </label>
+            <label class="radio inline">
+                <input type="radio" name="answer" value="b">
+                <code>\dfrac{6}{8}</code>
+            </label>
+            <label class="radio inline">
+                <input type="radio" name="answer" value="c">
+                <code>\dfrac{24}{32}</code>
+            </label>
+            <label class="radio inline">
+                <input type="radio" name="answer" value="none">
+                None of these
+            </label>
+        </div>
+    {{/videoframeQuestion}}
+
+---
+time: "1m20s",
+correctData: {"answer": [
+    true,
+    false,
+    false,
+    true,
+    true,
+    false,
+    false,
+    false
+]}
+template: |
+    {{#videoframeQuestion submitKind="submit-area"}}
+        <div class="qtip-question" style="width: 400px" data-qtip='{"position": {"my": "top right", "adjust": {"x": 450, "y": 130}}}'>
+            <p>
+                To find the largest factor, we need
+                to think about numbers that are factors
+                of both the numerator and the denominator.
+            </p>
+            <p>Which of the following numbers are factors of both 48 and 64?</p>
+            <p>Check all that apply.</p>
+
+            <div style="text-align: center">
+                <label class="checkbox inline"><input type="checkbox" name="answer"> 2</label>
+                <label class="checkbox inline"><input type="checkbox" name="answer"> 3</label>
+                <label class="checkbox inline"><input type="checkbox" name="answer"> 5</label>
+                <label class="checkbox inline"><input type="checkbox" name="answer"> 8</label>
+                <br>
+                <label class="checkbox inline"><input type="checkbox" name="answer"> 16</label>
+                <label class="checkbox inline"><input type="checkbox" name="answer"> 24</label>
+                <label class="checkbox inline"><input type="checkbox" name="answer"> 32</label>
+                <label class="checkbox inline"><input type="checkbox" name="answer"> None</label>
+            </div>
+        </div>
+    {{/videoframeQuestion}}
+
+---
+time: "5m40s",
+explainAgain: "0m4s",
+correctData: {numerator: "1", denominator: "3"}
+template: |
+    <div class="layer backdrop whiteout"></div>
+    <div class="layer controls">
+        <form class="popout">
+            <a class="close" href="javascript: void 0">&times;</a>
+            <p>Let's see if you can do a similar problem.</p>
+            <p>Express <code>\dfrac{36}{108}</code> in lowest terms. Write your answer below.</p>
+
+            <code>\dfrac{36}{108} = </code>
+            <span class="fraction-input" style="width: 60px">
+                <input type="text" name="numerator" placeholder="?">
+                <hr>
+                <input type="text" name="denominator" placeholder="?">
+            </span>
+
+            {{>submit-area}}
+        </form>
+    </div>
+

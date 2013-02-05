@@ -1,0 +1,90 @@
+time: "0m49s",
+correctData: {answer: "b"}
+template: |
+    <div class="layer backdrop whiteout"></div>
+    <div class="layer controls">
+        <form class="popout">
+            <a class="close" href="javascript: void 0">&times;</a>
+            <p>Which of the following options do you think best describes Newton's Third Law mathematically?</p>
+
+            <p>
+                <label class="radio">
+                    <input type="radio" name="answer" value="a">
+                    <code>F = ma</code>
+                </label>
+                <label class="radio">
+                    <input type="radio" name="answer" value="b">
+                    <code>F (a \rightarrow b) = F (b \rightarrow a)</code>
+                </label>
+                <label class="radio">
+                    <input type="radio" name="answer" value="c">
+                    <code>\sum(\mbox{all forces at rest}) = 0</code>
+                </label>
+            </p>
+            {{>submit-area}}
+        </form>
+    </div>
+
+---
+time: "4m37s",
+correctData: {answer: "f1"}
+template: |
+    <div class="layer backdrop whiteout"></div>
+    <div class="layer controls">
+        <form class="popout">
+            <a class="close" href="javascript: void 0">&times;</a>
+            <p><strong>True or false</strong>: once a rocket is in space, it is impossible for it to accelerate or change direction.</p>
+
+            <p>Select the best answer below, and be careful to make sure the reasoning is correct!</p>
+
+            <p>
+                <label class="radio">
+                    <input type="radio" name="answer" value="t1">
+                    <strong>True</strong>. Space is void of air, so the rockets have nothing to push against.
+                </label>
+                <label class="radio">
+                    <input type="radio" name="answer" value="t2">
+                    <strong>True</strong>. Gravity is absent in space, so there is no normal force, making acceleration impossible.
+                </label>
+                <label class="radio">
+                    <input type="radio" name="answer" value="f1">
+                    <strong>False</strong>. Rockets accelerate in space by accelerating fuel particles in the opposite direction.
+                </label>
+                <label class="radio">
+                    <input type="radio" name="answer" value="f2">
+                    <strong>False</strong>. There is no resistance in space, so nothing stops a rocket from accelerating.
+                </label>
+            </p>
+            {{>submit-area}}
+        </form>
+    </div>
+
+---
+time: "6m09.5s",
+correctData: {answer: ["4", "1", "2", "3"]}
+template: |
+    {{#videoframeQuestion submitKind="submit-area"}}
+        <div class="qtip-question" style="width: 400px" data-qtip='{"position": {"my": "right center", "adjust": {"x": 430, "y": 200}}}'>
+            <p>If you were the astronaut floating away into space, what could you do to make yourself drift back toward the space shuttle?</p>
+            <p>Rank the following options by how close they'll get you to the space shuttle (1 = best, 4 = worst).</p>
+            <p>
+                <label>
+                    <input type="text" name="answer" placeholder="?" style="width: 2em">
+                    Swim in the direction of the space shuttle.
+                </label>
+                <label>
+                    <input type="text" name="answer" placeholder="?" style="width: 2em">
+                    Throw your 100 kg backpack in the direction opposite to the space shuttle.
+                </label>
+                <label>
+                    <input type="text" name="answer" placeholder="?" style="width: 2em">
+                    Throw your 1 kg wrench in the direction opposite to the space shuttle.
+                </label>
+                <label>
+                    <input type="text" name="answer" placeholder="?" style="width: 2em">
+                    Throw your 100 kg backpack in the direction of the space shuttle.
+                </label>
+            </p>
+        </div>
+    {{/videoframeQuestion}}
+---

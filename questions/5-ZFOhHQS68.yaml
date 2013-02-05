@@ -1,0 +1,51 @@
+time: "0m36.8s",
+correctData: {answer: [true, false]}
+template: |
+    <div class="layer backdrop whiteout"></div>
+    <div class="layer controls">
+        <form class="popout">
+            <a class="close" href="javascript: void 0">&times;</a>
+            <p>Which of the statements are true?</p>
+
+            <label class="checkbox">
+                <input type="checkbox" name="answer">
+                An object in motion will remain in motion forever unless acted on by an unbalanced force.
+            </label>
+            <label class="checkbox">
+                <input type="checkbox" name="answer">
+                If a TV is being pushed across the floor at a constant velocity, an unbalanced force must be applied to it.
+            </label>
+            {{>submit-area-pre}}
+        </form>
+    </div>
+
+---
+time: "3m36s",
+correctData: {answer: [false, true, true, false]}
+template: |
+    <div class="layer backdrop whiteout"></div>
+    <div class="layer controls">
+        <form class="popout">
+            <a class="close" href="javascript: void 0">&times;</a>
+            <p>Why do objects stop moving in the real world? Why don't they keep moving forever?</p>
+
+            <label class="checkbox">
+                <input type="checkbox" name="answer">
+                Classical physics only applies when there is no gravity.
+            </label>
+            <label class="checkbox">
+                <input type="checkbox" name="answer">
+                The force of friction is unbalanced and acts in the opposite direction of motion.
+            </label>
+            <label class="checkbox">
+                <input type="checkbox" name="answer">
+                The force of air resistance (air friction) is unbalanced and acts in the opposite direction of motion.
+            </label>
+            <label class="checkbox">
+                <input type="checkbox" name="answer">
+                Objects keep moving. We just think they have stopped.
+            </label>
+            {{>submit-area-pre}}
+        </form>
+    </div>
+---

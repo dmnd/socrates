@@ -1,0 +1,15 @@
+time: "0m15s",
+correctData: {numerator: "3", denominator: "5"}
+template: |
+    {{#videoframeQuestion submitKind="submit-area-pre"}}
+        <div class="qtip-question" data-qtip='{"position": {"my": "top left", "adjust": {"x": 280, "y": 95}}}'>
+            <p>Let's see if you already know this.</p>
+            <p>Write your answer below.</p>
+            answer =
+            <span class="fraction-input" style="width: 60px">
+                <input type="text" name="numerator" placeholder="?">
+                <hr>
+                <input type="text" name="denominator" placeholder="?">
+            </span>
+        </div>
+    {{/videoframeQuestion}}

@@ -1,0 +1,41 @@
+time: "0m6s",
+correctData: {"answer": "49"}
+template: |
+    {{#videoframeQuestion submitKind="submit-area-pre-no-answer"}}
+        <div class="label" style="left: 150px; top: 90px; ">
+            <code>a =</code>
+        </div>
+        <div class="inputtext" style="position: absolute; width: 35px; height: 25px; left: 195px; top: 90px; ">
+            <input type="text" name="answer" placeholder="?">
+            <span class="qtip-question" data-qtip-target="input" data-qtip='{"position": {"my": "top middle", "at": "bottom middle"}}'>
+                Before Sal shows you how to do this,<br>
+                what do you think the answer is?
+            </span>
+        </div>
+    {{/videoframeQuestion}}
+
+---
+explainAgain: 0m6s
+time: "1m53.5s",
+correctData: {"answer": "33"}
+template: |
+    <div class="layer backdrop whiteout"></div>
+    <div class="layer controls">
+        <form class="popout">
+            <a class="close" href="javascript: void 0">&times;</a>
+            <p>Let's practice that again. Solve for <code>a</code> in the following equation.</p>
+
+            <div style="text-align: center">
+                <code>a - 8 = 25</code>
+            </div>
+
+            <div style="text-align: center">
+                <code>a = </code>
+                <input type="text" placeholder="?" style="width: 2em" name="answer">
+            </div>
+
+            {{>submit-area}}
+        </form>
+    </div>
+
+---
