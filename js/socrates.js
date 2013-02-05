@@ -1,4 +1,6 @@
-Socrates = window.Socrates || {};
+(function() {
+
+window.Socrates = {};
 
 /**
  * Handle a click on a link to a socrates bookmark. Such links have a href
@@ -941,6 +943,43 @@ Socrates.Manager = (function() {
 })();
 
 
+Socrates.instantiateModels = function(qns) {
+    // create a bookmark for each qn that has explainAgain
+    var qnsAndBookmarks = [];
+    _.each(qns, function(qn) {
+        if (qn.explainAgain) {
+            qnsAndBookmarks.push(new Socrates.Bookmark({
+                time: qn.explainAgain,
+                title: qn.title
+            }));
+        }
+        qnsAndBookmarks.push(new Socrates.Question(qn));
+    });
+
+    return new Backbone.Collection(qnsAndBookmarks);
+};
+
+Socrates.instantiateFromYaml = function(yaml, youtubeId) {
+    var qns = Socrates.fromYaml(yaml, youtubeId, Handlebars.compile);
+    return Socrates.instantiateModels(qns);
+};
+
+Socrates.loadQuestions = function(maybeQuestions, youtubeId) {
+    // The question package exports question in two different formats,
+    // depending if we are in dev or prod mode:
+    //  - in dev, we get raw yaml and must convert this to js
+    //  - in prod, we get js that can be directly instantiated
+    if (_.isString(maybeQuestions)) {
+        // we're loading directly from a yaml file in dev mode,
+        return Socrates.instantiateFromYaml(maybeQuestions,
+            youtubeId, Handlebars.compile);
+    } else {
+        // prod mode; we load directly
+        return Socrates.instantiateModels(qns);
+    }
+};
+
+
 /**
  * Initialize socrates questions for a particular videoView.
  *
@@ -968,18 +1007,8 @@ Socrates.forView = function(view, events) {
         PackageManager.registerDynamic(questionPkg);
         promises.push(PackageManager.require(questionPkg.name).
                                      pipe(function(maybeQuestions) {
-            if (_.isString(maybeQuestions)) {
-                // we're loading directly from a yaml file in dev mode
-                return Socrates.loadYaml(
-                    maybeQuestions, view.model.get("youtubeId"));
-            } else {
-                // we have precompiled questions.
-                return new Backbone.Collection(
-                    _.map(maybeQuestions, function(q) {
-                        return new Socrates.Question(q);
-                    }));
-            }
-        }));
+            return Socrates.loadQuestions(maybeQuestions,
+                                          view.model.get("youtubeId"))}));
     }
 
     return $.when.apply(null, promises).then(function(view, mj, promisedEvents) {
@@ -1145,3 +1174,5 @@ Handlebars.registerHelper("videoframeQuestion", function(options) {
 //         poppler.add(item.seconds()[0], _.bind(item.trigger, item));
 //     });
 // };
+
+})();

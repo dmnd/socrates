@@ -2,22 +2,21 @@
 
 var jsyaml = require("js-yaml");
 var Handlebars = require("handlebars");
+var _ = require("underscore");
+var fromYaml = require("../js/load-yaml.js");
 
-var yamlToJS = function(rawYaml, youtubeId) {
-    var docs = [];
-    jsyaml.loadAll(rawYaml, function(r) {
-        r["youtubeId"] = youtubeId;
-        docs.push(r);
+var yamlToJS = function(yaml, youtubeId) {
+    // read the yaml file, compiling templates to evalable strings
+    var qns = fromYaml(yaml, youtubeId, function(template) {
+        return "template(" + Handlebars.precompile(template) + ")";
     });
 
-    var out = docs.map(function(e) {
-        // hack hack hack!
+    // stringify everything else
+    var out = qns.map(function(e) {
         res = {};
         for (var k in e) {
             var k2 = JSON.stringify(k);
-            res[k2] = k === "template" ?
-                "template(" + Handlebars.precompile(e.template) + ")" :
-                    JSON.stringify(e[k]);
+            res[k2] = k === "template" ? e[k] : JSON.stringify(e[k]);
         }
         return res;
     }).map(function(e) {

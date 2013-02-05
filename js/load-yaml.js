@@ -1,27 +1,38 @@
-Socrates.loadYaml = function(yaml, youtubeId) {
-    docs = [];
-    jsyaml.loadAll(yaml, function(r) {docs.push(r);});
+(function() {
 
-    var collapsed = _.map(docs, function(doc) {
-        if (doc.kind === "bookmark") {
-            return new Socrates.Bookmark(doc);
-        } else {
-            doc.template = Handlebars.compile(doc.template);
-            doc.youtubeId = youtubeId;
-            return new Socrates.Question(doc);
-        }
+var isNode = typeof module !== 'undefined' && module.exports;
+
+var jsyaml, _;
+if (isNode) {
+    jsyaml = require("js-yaml");
+    _ = require("underscore");
+} else {
+    jsyaml = window.jsyaml;
+    _ = window._;
+}
+
+var fromYaml = function(yaml, youtubeId, compileFn) {
+    var qns = [];
+    jsyaml.loadAll(yaml, function(q) {qns.push(q);});
+
+    // add the youtube id
+    _.each(qns, function(qn) {
+        qn.youtubeId = youtubeId;
     });
 
-    var expanded = [];
-    _.each(collapsed, function(i) {
-        var t = i.get("explainAgain");
-        if (t) {
-            expanded.push(new Socrates.Bookmark({
-                time: t,
-                title: i.get("title")
-            }));
-        }
-        expanded.push(i);
+    // compile the template
+    _.each(qns, function(qn) {
+        qn.template = compileFn(qn.template);
     });
-    return new Backbone.Collection(expanded);
+
+    return qns;
 };
+
+// export fromYaml so it can be used in build process by node
+if (isNode) {
+    module.exports = fromYaml;
+} else {
+    Socrates.fromYaml = fromYaml;
+}
+
+})();

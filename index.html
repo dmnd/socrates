@@ -79,7 +79,7 @@ jsyaml.addConstructor("!bookmark", function(node) {
 
 var getSocratesEvents = function(url, youtubeId) {
     return $.when($.get(url), regreq("socrates.js")).pipe(function(xhr) {
-        return Socrates.loadYaml(xhr[0], youtubeId);
+        return Socrates.loadQuestions(xhr[0], youtubeId);
     });
 };
 

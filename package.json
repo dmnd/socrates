@@ -6,6 +6,7 @@
     "dependencies": {
         "js-yaml": "1.x.x",
         "handlebars": "1.0.5beta",
-        "glob": "3.1.x"
+        "glob": "3.1.x",
+        "underscore": "1.4.x"
     }
 }
