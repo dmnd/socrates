@@ -975,7 +975,7 @@ Socrates.loadQuestions = function(maybeQuestions, youtubeId) {
             youtubeId, Handlebars.compile);
     } else {
         // prod mode; we load directly
-        return Socrates.instantiateModels(qns);
+        return Socrates.instantiateModels(maybeQuestions);
     }
 };
 
