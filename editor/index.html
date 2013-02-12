@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Socrates static test page</title>
+
+<link rel="stylesheet" href="css/khan-site.css">
+<style>
+.video {
+    width: 800px;
+}
+
+#data-source input[name=q] {
+    width: 300px;
+}
+</style>
+</head>
+
+<body>
+    <form id="data-source">
+        <label>Youtube id: <input type="text" name="v"></input></label><br>
+        <label>Questions url: <input type="text" name="q"></input></label>
+        <button type="submit">Load</button>
+    </form>
+
+    <div id="video-container"></div>
+
+    <button id="show-response">Show current response</button>
+    <div id="current-response">
+    </div>
+
+
+<script src="js/khan-site.js"></script>
+<script>KAConsole.enable(true);</script>
+<script>
+PackageManager.registerDynamic({
+    name: "socrates.js",
+    files: [
+        "/js/socrates-nav.handlebars",
+        "/js/submit-area.handlebars",
+        "/js/submit-area-pre.handlebars",
+        "/js/submit-area-pre-no-answer.handlebars",
+        "/js/videoframe.handlebars",
+        "/js/socrates.js",
+
+        "/js/js-yaml.js",
+        "/js/load-yaml.js"
+    ]
+});
+(function() {
+
+var createVideoView = function(youtubeId) {
+    var videoView = new VideoView({youtubeId: youtubeId});
+    $("#video-container").append(videoView.el);
+    return videoView.whenReady();
+};
+
+var getSocratesEvents = function(url, youtubeId) {
+    return $.when($.get(url), PackageManager.require("socrates.js")).
+        pipe(function(xhr) {
+            Socrates.requireMathJax("//www.khanacademy.org");
+            return Socrates.loadQuestions(xhr[0], youtubeId);
+        });
+};
+
+var youtubeId = "xyAuNHPsq-g";
+var qs = parseQueryString();
+if ("v" in qs) {
+    youtubeId = qs["v"];
+}
+
+var url = "/questions/" + youtubeId + ".yaml";
+if ("q" in qs && qs["q"].length) {
+    url = qs["q"];
+}
+$("#data-source input[name=v]").val(youtubeId);
+$("#data-source input[name=q]").val(url);
+
+$.when( createVideoView(youtubeId), getSocratesEvents(url, youtubeId)).
+    then(function(view, events) {
+        Socrates.forView(view, events);
+        window.videoView = view;
+    });
+
+$("#show-response").on("click", function() {
+    var d = window.videoView.socratesManager.currentView.getData();
+    $("#current-response").text(JSON.stringify(d));
+});
+
+})();
+</script>
+</body>
+</html>

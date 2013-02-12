@@ -1071,7 +1071,7 @@ Handlebars.registerPartial("submit-area-pre-no-answer", Templates.get("socrates.
  *
  * @return {Promise} that resolves when MathJax is ready
  */
-Socrates.requireMathJax = _.memoize(function() {
+Socrates.requireMathJax = _.once(function(domain) {
     var dfd = $.Deferred();
 
     var script = document.createElement("script");
@@ -1079,7 +1079,10 @@ Socrates.requireMathJax = _.memoize(function() {
 
     // TODO(dmnd): Get the config parameter from a central location to make this
     // robust to updates to KAthJax
-    script.src = "/khan-exercises/utils/MathJax/1.1a/MathJax.js?config=KAthJax-8a6b08f6f5c97d7c3c310cc909a7a140";
+    script.src = (domain || "") +
+        "/khan-exercises/utils/MathJax/1.1a/MathJax.js" +
+        "?config=KAthJax-8a6b08f6f5c97d7c3c310cc909a7a140";
+
 
     script.onerror = function() {
         // No error in IE, but this is mostly for debugging during development
