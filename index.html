@@ -84,6 +84,10 @@ var getSocratesEvents = function(url, youtubeId) {
 };
 
 regreq("shared.js").then(function() {
+    // hack: fake an api cookie so that shared.js doesn't try to load an out of
+    // date notification
+    createCookie("fkey", "socrates-previewer");
+
     var youtubeId = "xyAuNHPsq-g";
     var qs = parseQueryString();
     if ("v" in qs) {
