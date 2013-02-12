@@ -25853,7 +25853,7 @@ HoverCardView = Backbone.View.extend({
 
         // It's confusing showing "joined a few minutes ago" to phantom users
         // as they haven't joined, really.
-        if (this.model.isPhantom()) {
+        if (this.model && this.model.isPhantom()) {
             this.$(".join-date").hide();
         } else {
             this.$("abbr.timeago").timeago();

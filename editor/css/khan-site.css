@@ -2813,7 +2813,7 @@ a:link.google-analytics-link-track
 /* YouTube jump links found in video discussion and on /about */
 span.youTube {
     padding-left: 18px;
-    background: url(http://www.khanacademy.org/'/images/play.png') no-repeat left top;
+    background: url('http://www.khanacademy.org/images/play.png') no-repeat left top;
     color: #005987;
     cursor: pointer;
 }
@@ -5001,8 +5001,8 @@ a.big-button:active > div {
     */
 @font-face {
   font-family: 'FontAwesome';
-  src: url(http://www.khanacademy.org/'/fonts/fontawesome-webfont.eot');
-  src: url(http://www.khanacademy.org/'/fonts/fontawesome-webfont.eot?#iefix') format('embedded-opentype'), url('/fonts/fontawesome-webfont.woff') format('woff'), url('/fonts/fontawesome-webfont.ttf') format('truetype');
+  src: url('http://www.khanacademy.org/fonts/fontawesome-webfont.eot');
+  src: url('http://www.khanacademy.org/fonts/fontawesome-webfont.eot?#iefix') format('embedded-opentype'), url('http://www.khanacademy.org/fonts/fontawesome-webfont.woff') format('woff'), url('http://www.khanacademy.org/fonts/fontawesome-webfont.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -7411,7 +7411,7 @@ a.simple-button.seethrough.goal-history {
   z-index: 1;
 }
 .modal.goal-new-custom .progress-bar .ui-progressbar-value {
-  background-image: url(http://www.khanacademy.org/'/images/progress-animated.gif');
+  background-image: url('http://www.khanacademy.org/images/progress-animated.gif');
 }
 #create-goal .section-headline {
   padding-top: 0;
