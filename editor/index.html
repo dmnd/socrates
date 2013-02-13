@@ -47,6 +47,9 @@ PackageManager.registerDynamic({
     ]
 });
 (function() {
+// hack: fake an api cookie so that shared.js doesn't try to load an out of
+// date notification
+createCookie("fkey", "socrates-previewer");
 
 var createVideoView = function(youtubeId) {
     var videoView = new VideoView({youtubeId: youtubeId});
