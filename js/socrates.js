@@ -94,10 +94,6 @@ Socrates.Question = Socrates.Bookmark.extend({
 
     imageUrl: function() {
         return this.get("youtubeId") + "-" + this.get("time");
-    },
-
-    templateName: function() {
-        return "socrates-" + this.get("youtubeId") + "." + this.baseSlug();
     }
 });
 
@@ -131,7 +127,7 @@ Socrates.QuestionView = Backbone.View.extend({
     initialize: function() {
         _.extend(this, this.options);
         this.loaded = false;
-        this.template = this.model.get("template") || Templates.get(this.model.templateName());
+        this.template = this.model.get("template");
 
         this.render();
     },
