@@ -94,10 +94,6 @@ Socrates.Question = Socrates.Bookmark.extend({
 
     imageUrl: function() {
         return this.get("youtubeId") + "-" + this.get("time");
-    },
-
-    templateName: function() {
-        return "socrates-" + this.get("youtubeId") + "." + this.baseSlug();
     }
 });
 
@@ -131,7 +127,7 @@ Socrates.QuestionView = Backbone.View.extend({
     initialize: function() {
         _.extend(this, this.options);
         this.loaded = false;
-        this.template = this.model.get("template") || Templates.get(this.model.templateName());
+        this.template = this.model.get("template");
 
         this.render();
     },
@@ -656,18 +652,71 @@ Socrates.Nav = Backbone.View.extend({
     },
 
     initialize: function(options) {
-        this.manager = options.manager;
+        this.videoModel = options.videoModel;
+        this.bookmarkModels = options.bookmarkModels;
+
         this._enable();
-        this.manager.videoView.model
-            .on("change:socratesEnabled", this._enable, this);
-        this.model.on("change", this.render, this);
+        this.videoModel.
+            on("change:socratesEnabled", this._enable, this).
+            on("change:duration", this.render, this);
+        this.bookmarkModels.on("change", this.render, this);
+
     },
 
-    _questionsJson: function() {
-        return this.model
+    renderAtWill: function() {
+        // if we already know the duration, just render
+        if (this.videoModel.get("duration")) {
+            this.render();
+            return;
+        }
+
+        // If we do not yet have a duration, try to get it from somewhere.
+
+        // First we try the YouTube player API's getDuration method. Youtube's
+        // getDuration returns 0 until the video starts playing. The docs
+        // claim[1] this will happen "until until the video's metadata is
+        // loaded, which normally happens just after the video starts playing."
+        //
+        // Youtube must have some private source for the duration because they
+        // display it in the player chrome! We don't have access to it though,
+        // so instead we must rely on the server provided value for duration.
+        //
+        // [1]: https://developers.google.com/youtube/js_api_reference#Retrieving_video_information
+        var duration = this.videoModel.player.getDuration();
+        if (duration) {
+            this.videoModel.set("duration", duration); // triggers a render
+            return;
+        }
+
+        // Next we will try the YouTube feed API.
+        var youtubeId = this.videoModel.get("youtubeId");
+        var url = "http://gdata.youtube.com/feeds/api/videos/" + youtubeId +
+            "?alt=json-in-script";
+        $.ajax({url: url, dataType: "jsonp"}).pipe(function(videoFeed) {
+            try {
+                return parseFloat(
+                    videoFeed.entry.media$group.yt$duration.seconds);
+            }
+            catch(e) {
+                KAConsole.log("YouTube feed api failed for " + youtubeId);
+                return 0;
+            }
+        }).done(_(function(duration) {
+            if (!this.videoModel.get("duration")) {
+                // fall back to getDuration if the api failed
+                duration = duration || this.videoModel.player.getDuration();
+                if (duration) {
+                    this.videoModel.set("duration", duration);
+                }
+            }
+        }).bind(this));
+    },
+
+    _questionsJson: function(duration) {
+        return this.bookmarkModels
             .filter(Socrates.isQuestion)
             .map(function(q) {
-                var pc = q.seconds() / this.options.videoDuration * 100;
+                var pc = q.seconds() / duration * 100;
                 return {
                     time: q.get("time"),
                     slug: q.slug(),
@@ -678,13 +727,17 @@ Socrates.Nav = Backbone.View.extend({
     },
 
     _enable: function() {
-        var enabled = this.manager.videoView.model.get("socratesEnabled");
+        var enabled = this.videoModel.get("socratesEnabled");
         this.$el.css("display", enabled ? "block" : "none");
     },
 
     render: function() {
+        // we can't render if we don't know the duration
+        var duration = this.videoModel.get("duration");
+        if (!duration) return;
+
         this.$el.html(this.template({
-            questions: this._questionsJson()
+            questions: this._questionsJson(duration)
         }));
         return this;
     }
@@ -1012,50 +1065,34 @@ Socrates.forView = function(view, events) {
     }
 
     return $.when.apply(null, promises).then(function(view, mj, promisedEvents) {
-            // create a manager to handle state transitions
-            var manager = new Socrates.Manager(view, events || promisedEvents);
+        // create a manager to handle state transitions
+        var manager = new Socrates.Manager(view, events || promisedEvents);
 
-            // this reference is needed by Socrates.potentialBookmark
-            view.socratesManager = manager;
+        // this reference is needed by Socrates.potentialBookmark
+        view.socratesManager = manager;
 
 
-            // Enable and check the questions checkbox in options menu
-            view.model.set({
-                socratesAvailable: true,
-                socratesEnabled: true
-            });
+        // Enable and check the questions checkbox in options menu
+        view.model.set({
+            socratesAvailable: true,
+            socratesEnabled: true
+        });
 
-            // create views
+        // create views
+        var nav = new Socrates.Nav({
+            el: ".socrates-nav",
+            bookmarkModels: manager.bookmarks,
+            videoModel: view.model,
+            $hoverContainerEl: $(".youtube-video")
+        });
+        nav.renderAtWill();
 
-            // Youtube's getDuration returns 0 until the video starts
-            // playing. The documentation claims[1] this will happen
-            // "until until the video's metadata is loaded, which
-            // normally happens just after the video starts playing."
-            //
-            // Youtube must have some private source for the duration
-            // because they display it in the player chrome. We don't
-            // have access to it though, so instead we must rely on the
-            // server provided value for duration.
-            //
-            // [1]: https://developers.google.com/youtube/js_api_reference#Retrieving_video_information
-            var duration = (view.model.player.getDuration() ||
-                view.model.get("duration") || 0);
-
-            var nav = new Socrates.Nav({
-                el: ".socrates-nav",
-                model: manager.bookmarks,
-                videoDuration: duration,
-                $hoverContainerEl: $(".youtube-video"),
-                manager: manager
-            });
-            nav.render();
-
-            var masterView = new Socrates.MasterView({
-                el: ".video-overlay",
-                views: manager.questionViews
-            });
-            masterView.render();
-        }).promise();
+        var masterView = new Socrates.MasterView({
+            el: ".video-overlay",
+            views: manager.questionViews
+        });
+        masterView.render();
+    }).promise();
 };
 
 Handlebars.registerPartial("submit-area", Templates.get("socrates.submit-area"));

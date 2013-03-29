@@ -1,5 +1,5 @@
-time: 3m46s
-explainAgain: 1m0s
+time: 3m46.8s
+explainAgain: 1m01s
 correctData: {answer: [false, true, true, false, false, false]}
 Explanation: Blood exists the pulmonary trunk and flows into the Right and Left pulmonary artery.  Remember that arteries take blood away from the heart.
 template: |
@@ -22,8 +22,8 @@ template: |
   </div>
 
 ---
-time: 6m31s
-explainAgain: 5m35s
+time: 6m31.3s
+explainAgain: 5m35.8s
 correctData: {answer: "4"}
 template: |
   <div class="layer backdrop whiteout"></div>
@@ -52,7 +52,7 @@ template: |
   </div>
 
 ---
-time: 8m14s
+time: 8m14.5s
 explainAgain: 7m0s
 correctData: {answer: "3"}
 Explanation: "Red blood cells are cells, even though they lack a nucleus and mitochondria.  They rely on glycolysis (Oxygen-independent process) to make ATP which does not use up oxygen.  This allows them to transport oxygen without using it all up themselves. "
@@ -84,7 +84,7 @@ template: |
   </div>
 
 ---
-time: 12m24s
+time: 12m24.5s
 explainAgain: 11m0s
 correctData: {answer: "2"}
 Explanation: "False.  You would expect to find mixing of blood from the systemic circulation and pulmonary circulation in the lungs. "
