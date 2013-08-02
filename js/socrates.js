@@ -1117,8 +1117,8 @@ Socrates.requireMathJax = _.once(function(domain) {
     // TODO(dmnd): Get the config parameter from a central location to make this
     // robust to updates to KAthJax
     script.src = (domain || "") +
-        "/khan-exercises/utils/MathJax/1.1a/MathJax.js" +
-        "?config=KAthJax-8a6b08f6f5c97d7c3c310cc909a7a140";
+        "/khan-exercises/utils/MathJax/2.1/MathJax.js" +
+        "?config=KAthJax-da9a7f53e588f3837b045a600e1dc439";
 
 
     script.onerror = function() {
