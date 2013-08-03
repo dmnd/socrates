@@ -1012,24 +1012,22 @@ Socrates.instantiateModels = function(qns) {
     return new Backbone.Collection(qnsAndBookmarks);
 };
 
-Socrates.instantiateFromYaml = function(yaml, youtubeId) {
-    var qns = Socrates.fromYaml(yaml, youtubeId, Handlebars.compile);
-    return Socrates.instantiateModels(qns);
-};
-
 Socrates.loadQuestions = function(maybeQuestions, youtubeId) {
     // The question package exports question in two different formats,
     // depending if we are in dev or prod mode:
-    //  - in dev, we get raw yaml and must convert this to js
-    //  - in prod, we get js that can be directly instantiated
-    if (_.isString(maybeQuestions)) {
-        // we're loading directly from a yaml file in dev mode,
-        return Socrates.instantiateFromYaml(maybeQuestions,
-            youtubeId, Handlebars.compile);
+    var questions;
+    if ("questions" in maybeQuestions) {
+        // in prod, questions are compiled and placed into an array
+        // {questions: [...]}
+        questions = maybeQuestions.questions;
     } else {
-        // prod mode; we load directly
-        return Socrates.instantiateModels(maybeQuestions);
+        // in dev, we get an object with a yaml string that must be compiled
+        // {yaml: "..."}
+        var yaml = maybeQuestions.yaml;
+        questions = Socrates.fromYaml(yaml, youtubeId, Handlebars.compile);
     }
+
+    return Socrates.instantiateModels(questions);
 };
 
 
