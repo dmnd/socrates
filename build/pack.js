@@ -27,16 +27,17 @@ var yamlToJS = function(yaml, youtubeId) {
         return "{\n" + res.join(",\n") + "\n}";
     });
 
-    var output = [];
-    output.push("(function() {\n");
-    output.push("var template = Handlebars.template;\n");
-    output.push("PackageManager.define(");
-    output.push("\"socrates-" + youtubeId + ".js\", ");
-    output.push("{\"questions\": ");
-    output.push("[" + out.join(',\n') + "]");
-    output.push("}");
-    output.push(");\n");
-    output.push("})();\n");
+    var output = [
+        "(function() {\n",
+        "var template = Handlebars.template;\n",
+        "PackageManager.define(",
+        "\"socrates-" + youtubeId + ".js\", ",
+        "{\"questions\": ",
+        "[" + out.join(',\n') + "]",
+        "}",
+        ");\n",
+        "})();\n"
+    ];
     return output.join('');
 };
 
