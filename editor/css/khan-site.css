@@ -9059,10 +9059,10 @@ div.unisubs-dropdown.cleanslate {
   color: white;
   text-align: center;
   line-height: 52px;
-  font-size: 14px;
+  font-size: 10px;
   position: absolute;
   width: 104%;
-  top: -5px;
+  top: -1px;
   text-transform: uppercase;
 }
 .post-video-signup-form h5 {
