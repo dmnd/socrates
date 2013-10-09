@@ -47,11 +47,25 @@ var fs = require("fs");
 var glob = require("glob");
 
 
-// compile each yaml file to a js file.
-glob.sync("questions/*.yaml").forEach(function(file) {
-    console.log(file);
-    var youtubeId = path.basename(file).slice(0, -".yaml".length);
-    var rawYaml = fs.readFileSync(file, 'utf-8');
+// compile each yaml file to a js file.  If no files are given on the
+// commandline, process everything in <cwd>/questions/*.yaml.
+// If the input is given in the form "a::b", then a is taken to be
+// the input file, and b is taken to be the output file.
+var argv = process.argv.slice(2);
+if (!argv.length) {
+    argv = glob.sync("questions/*.yaml");
+}
+argv.forEach(function(file) {
+    var infile = file;
+    var outfile = file + ".js";
+    var in_and_out_file = file.split('::');
+    if (in_and_out_file.length === 2) {
+        infile = in_and_out_file[0];
+        outfile = in_and_out_file[1];
+    }
+    console.log(infile, '=>', outfile);
+    var youtubeId = path.basename(infile).slice(0, -".yaml".length);
+    var rawYaml = fs.readFileSync(infile, 'utf-8');
     var js = yamlToJS(rawYaml, youtubeId);
-    fs.writeFileSync(file + ".js", js, 'utf-8');
+    fs.writeFileSync(outfile, js, 'utf-8');
 });
