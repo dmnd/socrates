@@ -26,6 +26,11 @@ Socrates.potentialBookmark = function(e) {
     });
     if (handled) {
         e.preventDefault();
+        // TODO(mattfaus): When you load the page (and the video is currently
+        // stopped), and click on a Socrates question, it will begin playing
+        // the video behind the question.  I tried .stopPropagation() here to
+        // prevent this click from "going through" the Socrates widget and into
+        // the YouTube video widget, but could not get it to work.
     }
 };
 
@@ -1069,14 +1074,21 @@ Socrates.forView = function(view, events) {
         // this reference is needed by Socrates.potentialBookmark
         view.socratesManager = manager;
 
+        // We used to set these to true automatically after the Socrates
+        // questions were loaded, but now we set them to the state they should
+        // be, before loading the questions (in
+        // video-addons.js~VideoPlayerModel._handleResults()).  We can do this
+        // because the video model has a "hasQuestions" attribute.  There is a
+        // small chance that the caller could set these 2 variables to true,
+        // and then this init fails.  There is currently no recovery path from
+        // that scenario, so it would probably result in some JS errors and
+        // would require a page refresh to fix.
+        // view.model.set({
+        //     socratesAvailable: true
+        //     socratesEnabled: true
+        // });
 
-        // Enable and check the questions checkbox in options menu
-        view.model.set({
-            socratesAvailable: true,
-            socratesEnabled: true
-        });
-
-        // create views
+        // Create views
         var nav = new Socrates.Nav({
             el: ".socrates-nav",
             bookmarkModels: manager.bookmarks,
@@ -1114,9 +1126,10 @@ Socrates.requireMathJax = _.once(function(domain) {
 
     // TODO(dmnd): Get the config parameter from a central location to make this
     // robust to updates to KAthJax
+    // TODO(mattfaus): Yeah, that ^
     script.src = (domain || "") +
-        "/khan-exercises/utils/MathJax/2.1/MathJax.js" +
-        "?config=KAthJax-da9a7f53e588f3837b045a600e1dc439";
+        "/khan-exercises/third_party/MathJax/2.1/MathJax.js" +
+        "?config=KAthJax-9e2776ffe7d2006f16f36d0d55d9464b";
 
 
     script.onerror = function() {
