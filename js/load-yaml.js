@@ -1,14 +1,13 @@
 (function() {
 
-var isNode = typeof module !== 'undefined' && module.exports;
-
 var jsyaml, _;
-if (isNode) {
-    jsyaml = require("js-yaml");
-    _ = require("underscore");
-} else {
+
+if (typeof window !== 'undefined' && window.jsyaml && window._) {
     jsyaml = window.jsyaml;
     _ = window._;
+} else {
+    jsyaml = require("js-yaml");
+    _ = require("underscore");
 }
 
 var fromYaml = function(yaml, youtubeId, compileFn) {
@@ -29,9 +28,12 @@ var fromYaml = function(yaml, youtubeId, compileFn) {
 };
 
 // export fromYaml so it can be used in build process by node
-if (isNode) {
+if (typeof module !== 'undefined') {
     module.exports = fromYaml;
-} else {
+}
+
+// socrates.js expects this to be available in `Socrates.loadQuestions`
+if (typeof Socrates !== 'undefined') {
     Socrates.fromYaml = fromYaml;
 }
 
