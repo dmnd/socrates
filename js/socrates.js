@@ -1,5 +1,7 @@
 (function() {
 
+var Analytics = require("../../javascript/shared-package/analytics.js");
+
 window.Socrates = {};
 
 /**
