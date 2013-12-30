@@ -1076,19 +1076,12 @@ Socrates.forView = function(view, events) {
         // this reference is needed by Socrates.potentialBookmark
         view.socratesManager = manager;
 
-        // We used to set these to true automatically after the Socrates
-        // questions were loaded, but now we set them to the state they should
-        // be, before loading the questions (in
-        // video-addons.js~VideoPlayerModel._handleResults()).  We can do this
-        // because the video model has a "hasQuestions" attribute.  There is a
-        // small chance that the caller could set these 2 variables to true,
-        // and then this init fails.  There is currently no recovery path from
-        // that scenario, so it would probably result in some JS errors and
-        // would require a page refresh to fix.
-        // view.model.set({
-        //     socratesAvailable: true
-        //     socratesEnabled: true
-        // });
+        view.model.set({
+            socratesAvailable: true,
+            // TODO(mattfaus): Set the default to true, once T2053 and T2054
+            // are resolved.
+            socratesEnabled: false
+        });
 
         // Create views
         var nav = new Socrates.Nav({
