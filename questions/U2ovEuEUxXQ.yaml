@@ -14,7 +14,7 @@ explainAgain: 2m10s
 time: "3m41s"
 correctData: {numerator: "21", denominator: "35"}
 template: |
-    {{#videoframeQuestion submitKind="submit-area-pre-no-answer"}}
+    {{#videoframeQuestion submitKind="submit-area-pre"}}
         <span class="fraction-input" style="width: 60px; position: absolute; left: 330px; top: 45px">
             <input type="text" name="numerator" placeholder="?">
             <hr>
@@ -30,7 +30,7 @@ template: |
 time: "5m09s"
 correctData: {answer: "15"}
 template: |
-    {{#videoframeQuestion submitKind="submit-area-pre-no-answer"}}
+    {{#videoframeQuestion submitKind="submit-area-pre"}}
         <div class="inputtext" style="position: absolute; width: 45px; height: 25px; left: 360px; top: 40px; ">
             <input type="text" name="answer" placeholder="?">
             <div class="qtip-question" data-qtip-target="input" data-qtip='{"position": {"my": "left top", "at": "right middle"}}'>

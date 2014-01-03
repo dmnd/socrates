@@ -131,6 +131,10 @@ Socrates.QuestionView = Backbone.View.extend({
     timeDisplayed: 0,
     startTime: null,
 
+    // The current attempt at a Socrates question, note that this resets
+    // between page loads. To fix that, we should track this on the server.
+    attemptNumber: 0,
+
     initialize: function() {
         _.extend(this, this.options);
         this.loaded = false;
@@ -161,6 +165,8 @@ Socrates.QuestionView = Backbone.View.extend({
 
         this.loaded = true;
 
+        // TODO(mattfaus): This call to kathJax is not correctly rendering
+        // questions that require it.
         // render all latex
         Socrates.requireMathJax().then(_(function() {
             Socrates.kathJax(this.$("code"));
@@ -537,6 +543,7 @@ Socrates.QuestionView = Backbone.View.extend({
         evt.preventDefault();
         var $form = $(evt.currentTarget).parents("form");
         var $button = $form.find("button.submit");
+        this.attemptNumber++;
 
         // when question has been answered correctly, the submit button
         // says continue.
@@ -559,6 +566,16 @@ Socrates.QuestionView = Backbone.View.extend({
             // a wrong answer.
             this.$(".submit-area .alert-success").hide();
             this.$(".submit-area .alert-error").show();
+
+            // TODO(mattfaus): Only fire these events for videos that are
+            // currently being experimented on.  This will silently 404 if the
+            // video is not being experimented on.
+            if (this.attemptNumber === 1) {
+                gae_bingo.bingo(["socrates_incorrect_" +
+                    this.model.get("youtubeId") + "_binary",
+                    "socrates_incorrect_" +
+                    this.model.get("youtubeId") + "_count"]);
+            }
         } else {
             // a correct answer, or answering a question with no right or wrong.
             if (hasCorrectAnswer && response.correct) {
@@ -569,6 +586,16 @@ Socrates.QuestionView = Backbone.View.extend({
                 // to continue
                 // assert(!hasCorrectAnswer)
                 $info.show();
+            }
+
+            if (this.attemptNumber === 1) {
+                // TODO(mattfaus): Only fire these events for videos that are
+                // currently being experimented on.  This will silently 404 if the
+                // video is not being experimented on.
+                gae_bingo.bingo(["socrates_correct_" +
+                    this.model.get("youtubeId") + "_binary",
+                    "socrates_correct_" +
+                    this.model.get("youtubeId") + "_count"]);
             }
 
             // mark the question as complete
@@ -610,6 +637,14 @@ Socrates.QuestionView = Backbone.View.extend({
         this.validateResponse(response);
         this.log("skip", response);
         this.trigger("skipped");
+
+        // TODO(mattfaus): Only fire these events for videos that are
+        // currently being experimented on.  This will silently 404 if the
+        // video is not being experimented on.
+        gae_bingo.bingo(["socrates_skipped_" +
+            this.model.get("youtubeId") + "_binary",
+            "socrates_skipped_" +
+            this.model.get("youtubeId") + "_count"]);
     },
 
     log: function(kind, response) {
@@ -670,55 +705,6 @@ Socrates.Nav = Backbone.View.extend({
 
     },
 
-    renderAtWill: function() {
-        // if we already know the duration, just render
-        if (this.videoModel.get("duration")) {
-            this.render();
-            return;
-        }
-
-        // If we do not yet have a duration, try to get it from somewhere.
-
-        // First we try the YouTube player API's getDuration method. Youtube's
-        // getDuration returns 0 until the video starts playing. The docs
-        // claim[1] this will happen "until until the video's metadata is
-        // loaded, which normally happens just after the video starts playing."
-        //
-        // Youtube must have some private source for the duration because they
-        // display it in the player chrome! We don't have access to it though,
-        // so instead we must rely on the server provided value for duration.
-        //
-        // [1]: https://developers.google.com/youtube/js_api_reference#Retrieving_video_information
-        var duration = this.videoModel.player.getDuration();
-        if (duration) {
-            this.videoModel.set("duration", duration); // triggers a render
-            return;
-        }
-
-        // Next we will try the YouTube feed API.
-        var youtubeId = this.videoModel.get("youtubeId");
-        var url = "http://gdata.youtube.com/feeds/api/videos/" + youtubeId +
-            "?alt=json-in-script";
-        $.ajax({url: url, dataType: "jsonp"}).pipe(function(videoFeed) {
-            try {
-                return parseFloat(
-                    videoFeed.entry.media$group.yt$duration.seconds);
-            }
-            catch(e) {
-                KAConsole.log("YouTube feed api failed for " + youtubeId);
-                return 0;
-            }
-        }).done(_(function(duration) {
-            if (!this.videoModel.get("duration")) {
-                // fall back to getDuration if the api failed
-                duration = duration || this.videoModel.player.getDuration();
-                if (duration) {
-                    this.videoModel.set("duration", duration);
-                }
-            }
-        }).bind(this));
-    },
-
     _questionsJson: function(duration) {
         return this.bookmarkModels
             .filter(Socrates.isQuestion)
@@ -739,9 +725,13 @@ Socrates.Nav = Backbone.View.extend({
     },
 
     render: function() {
-        // we can't render if we don't know the duration
+        // This duration should be the serverside duration, from
+        // video_models.py~BaseVideo.duration.
         var duration = this.videoModel.get("duration");
-        if (!duration) return;
+        if (!duration) {
+            KAConsole.log("Error! Original video duration not found.")
+            return;
+        }
 
         this.$el.html(this.template({
             questions: this._questionsJson(duration)
@@ -783,13 +773,48 @@ Socrates.Manager = (function() {
             view.on("answered", this.submitted, this);
         }, this);
 
-        // hookup question display to video timeline
-        _.each(this.questions, function(q) {
-            this.videoView.atSeconds(
-                q.seconds(),
-                _.bind(this.videoTriggeredQuestion, this, q),
-                q.slug());
-        }, this);
+        // Hookup question display to video timeline
+        // As of 12/2013, we started running Video Efficacy experiments by
+        // replacing the video that was displayed with an alternative. The
+        // alternative video may not be the same length as the original video.
+        // So, we add the triggering events on a percentage basis, so they
+        // line up with the question mark icons (see Socrates.Nav
+        // ._questionsJson()) regardless of the length
+        // of the video.
+        // This duration should be the serverside duration, from
+        // video_models.py~BaseVideo.duration.
+
+        // However, we only want to do this on the experimental alternative
+        // videos, because the original videos may have very precisely timed
+        // questions (down to the milliseonds).  The serverside duration is
+        // rounded to the nearest second, whereas the value returned by
+        // youtube.getDuration() (which is used when setting up bookmarks)
+        // returns a double, presumably accurate to the 10s of milliseconds.
+        var youtubeId = this.videoView.model.get("youtubeId");
+        // We use URL-encoded youtube IDs to run A/A tests sometimes.
+        var translatedYoutubeId = decodeURIComponent(this.videoView.model.get(
+            "translatedYoutubeId"));
+
+        if (youtubeId !== translatedYoutubeId) {
+            // Use server-side duration, since we know this video is a
+            // different length than the video these questions were originally
+            // designed for.
+            var duration = this.videoView.model.get("duration");
+            _.each(this.questions, function(q) {
+                this.videoView.atPercent(
+                    (q.seconds() / duration) * 100,
+                    _.bind(this.videoTriggeredQuestion, this, q),
+                    q.slug());
+            }, this);
+        } else {
+            // Use the standard duration.
+            _.each(this.questions, function(q) {
+                this.videoView.atSeconds(
+                    q.seconds(),
+                    _.bind(this.videoTriggeredQuestion, this, q),
+                    q.slug());
+            }, this);
+        }
 
         // TODO(dmnd): Remove all use of poppler from Socrates, go through the
         // VideoView instead
@@ -896,6 +921,9 @@ Socrates.Manager = (function() {
         }).bind(this));
     },
 
+    /**
+     * Enters a state, which at this point means "display a question".
+     */
     enterState: function(view) {
         this.leaveCurrentState();
 
@@ -903,6 +931,15 @@ Socrates.Manager = (function() {
         if (nextView) {
             this.currentView = nextView;
             this.currentView.show();
+
+            // TODO(mattfaus): Only fire these events for videos that are
+            // currently being experimented on.  This will silently 404 if the
+            // video is not being experimented on.
+            gae_bingo.bingo(["socrates_shown_" +
+                this.videoView.model.get("youtubeId") + "_binary",
+                "socrates_shown_" +
+                this.videoView.model.get("youtubeId") + "_count"]);
+
         } else {
             KAConsole.log("Invalid view triggered");
         }
@@ -1078,9 +1115,7 @@ Socrates.forView = function(view, events) {
 
         view.model.set({
             socratesAvailable: true,
-            // TODO(mattfaus): Set the default to true, once T2053 and T2054
-            // are resolved.
-            socratesEnabled: false
+            socratesEnabled: true
         });
 
         // Create views
@@ -1090,7 +1125,7 @@ Socrates.forView = function(view, events) {
             videoModel: view.model,
             $hoverContainerEl: $(".youtube-video")
         });
-        nav.renderAtWill();
+        nav.render();
 
         var masterView = new Socrates.MasterView({
             el: ".video-overlay",
@@ -1160,25 +1195,22 @@ Socrates.requireMathJax = _.once(function(domain) {
 
 Socrates.kathJax = function($els) {
     $els.each(function(i, elem) {
-        if (typeof elem.MathJax === "undefined") {
-            var $elem = $(elem);
+        var $elem = $(elem);
+        if ($elem.attr("data-math-formula") == null) {
+            var text = $elem.text();
 
             // Maintain the classes from the original element
             if (elem.className) {
                 $elem.wrap("<span class='" + elem.className + "'></span>");
             }
 
-            // Trick MathJax into thinking that we're dealing with a script block
-            elem.type = "math/tex";
-
-            // Make sure that the old value isn't being displayed anymore
-            elem.style.display = "none";
-
-            // Stick the processing request onto the queue
-            MathJax.Hub.Queue(["Typeset", MathJax.Hub, elem]);
-        } else {
-            MathJax.Hub.Queue(["Reprocess", MathJax.Hub, elem]);
+            $elem.empty().append("<script type='math/tex'>" +
+                    text.replace(/<\//g, "< /") + "</script>");
+            $elem.attr("data-math-formula", text);
         }
+
+        // Stick the processing request onto the queue
+        MathJax.Hub.Queue(["Reprocess", MathJax.Hub, elem.firstChild]);
     });
 };
 
