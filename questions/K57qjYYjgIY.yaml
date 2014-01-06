@@ -7,7 +7,7 @@ template: |
   <div class="layer controls">
     <form class="popout">
       <a class="close" href="javascript: void 0">&times;</a>
-      <p>Blood from the pulmonary trunk flows immidiately into which of the following vessels?</p>
+      <p>Blood from the pulmonary trunk flows immediately into which of the following vessels?</p>
       <p>Check all that apply.</p>
 
       <label class="checkbox"><input type="checkbox" name="answer"> Left Atrium</label>
