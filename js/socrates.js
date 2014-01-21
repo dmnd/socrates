@@ -1159,7 +1159,7 @@ Socrates.requireMathJax = _.once(function(domain) {
     // TODO(mattfaus): Yeah, that ^
     script.src = (domain || "") +
         "/khan-exercises/third_party/MathJax/2.1/MathJax.js" +
-        "?config=KAthJax-9e2776ffe7d2006f16f36d0d55d9464b";
+        "?config=KAthJax-8f02f65cba7722b3e529bd9dfa6ac25d";
 
 
     script.onerror = function() {
