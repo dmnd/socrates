@@ -19,7 +19,7 @@ template: |
             </label>
             <label class="radio">
                 <input type="radio" name="answer" value="d">
-                Move at a constant velocity, orbiting the planet for all eternity at an altitude of zero.
+                Move at a constant speed, orbiting the planet for all eternity at an altitude of zero.
             </label>
             <label class="radio">
                 <input type="radio" name="answer" value="e">
