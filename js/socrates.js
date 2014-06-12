@@ -566,16 +566,6 @@ Socrates.QuestionView = Backbone.View.extend({
             // a wrong answer.
             this.$(".submit-area .alert-success").hide();
             this.$(".submit-area .alert-error").show();
-
-            // TODO(mattfaus): Only fire these events for videos that are
-            // currently being experimented on.  This will silently 404 if the
-            // video is not being experimented on.
-            if (this.attemptNumber === 1) {
-                gae_bingo.bingo(["socrates_incorrect_" +
-                    this.model.get("youtubeId") + "_binary",
-                    "socrates_incorrect_" +
-                    this.model.get("youtubeId") + "_count"]);
-            }
         } else {
             // a correct answer, or answering a question with no right or wrong.
             if (hasCorrectAnswer && response.correct) {
@@ -586,16 +576,6 @@ Socrates.QuestionView = Backbone.View.extend({
                 // to continue
                 // assert(!hasCorrectAnswer)
                 $info.show();
-            }
-
-            if (this.attemptNumber === 1) {
-                // TODO(mattfaus): Only fire these events for videos that are
-                // currently being experimented on.  This will silently 404 if the
-                // video is not being experimented on.
-                gae_bingo.bingo(["socrates_correct_" +
-                    this.model.get("youtubeId") + "_binary",
-                    "socrates_correct_" +
-                    this.model.get("youtubeId") + "_count"]);
             }
 
             // mark the question as complete
@@ -637,14 +617,6 @@ Socrates.QuestionView = Backbone.View.extend({
         this.validateResponse(response);
         this.log("skip", response);
         this.trigger("skipped");
-
-        // TODO(mattfaus): Only fire these events for videos that are
-        // currently being experimented on.  This will silently 404 if the
-        // video is not being experimented on.
-        gae_bingo.bingo(["socrates_skipped_" +
-            this.model.get("youtubeId") + "_binary",
-            "socrates_skipped_" +
-            this.model.get("youtubeId") + "_count"]);
     },
 
     log: function(kind, response) {
@@ -931,15 +903,6 @@ Socrates.Manager = (function() {
         if (nextView) {
             this.currentView = nextView;
             this.currentView.show();
-
-            // TODO(mattfaus): Only fire these events for videos that are
-            // currently being experimented on.  This will silently 404 if the
-            // video is not being experimented on.
-            gae_bingo.bingo(["socrates_shown_" +
-                this.videoView.model.get("youtubeId") + "_binary",
-                "socrates_shown_" +
-                this.videoView.model.get("youtubeId") + "_count"]);
-
         } else {
             KAConsole.log("Invalid view triggered");
         }
