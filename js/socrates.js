@@ -1083,10 +1083,14 @@ Socrates.forView = function(view, events) {
         // and then this init fails.  There is currently no recovery path from
         // that scenario, so it would probably result in some JS errors and
         // would require a page refresh to fix.
-        // view.model.set({
-        //     socratesAvailable: true
-        //     socratesEnabled: true
-        // });
+
+        // HACK: Commenting out these next 2 lines breaks the static editor,
+        // so I've uncommented them. This obviously needs a better fix in the
+        // long run.
+        view.model.set({
+            socratesAvailable: true,
+            socratesEnabled: true
+        });
 
         // Create views
         var nav = new Socrates.Nav({
