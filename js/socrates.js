@@ -1021,6 +1021,14 @@ Socrates.loadQuestions = function(maybeQuestions, youtubeId) {
     // The question package exports question in two different formats,
     // depending if we are in dev or prod mode:
     var questions;
+
+    // HACK: Somehow maybeQuestions ends up as a string in the static editor.
+    // I can't investigate the root cause, but for now just wrap this in the
+    // expected object format so things continue to work.
+    if (typeof maybeQuestions === "string") {
+        maybeQuestions = {yaml: maybeQuestions};
+    }
+
     if ("questions" in maybeQuestions) {
         // in prod, questions are compiled and placed into an array
         // {questions: [...]}
